@@ -1,7 +1,7 @@
 import UIKit
 import FacebookLogin
 
-class ViewController: UIViewController {
+class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

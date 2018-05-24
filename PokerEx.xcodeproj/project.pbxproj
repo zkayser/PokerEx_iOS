@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */; };
-		A3DCAA7A20B338A800B8D2DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7920B338A800B8D2DA /* ViewController.swift */; };
+		A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */; };
 		A3DCAA7D20B338A800B8D2DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3DCAA7B20B338A800B8D2DA /* Main.storyboard */; };
 		A3DCAA7F20B338A900B8D2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3DCAA7E20B338A900B8D2DA /* Assets.xcassets */; };
 		A3DCAA8220B338A900B8D2DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3DCAA8020B338A900B8D2DA /* LaunchScreen.storyboard */; };
 		A3DCAA8D20B338A900B8D2DA /* PokerExTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA8C20B338A900B8D2DA /* PokerExTests.swift */; };
 		A3DCAA9820B338A900B8D2DA /* PokerExUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA9720B338A900B8D2DA /* PokerExUITests.swift */; };
+		A3E5FE8820B6E68E001FB457 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */; };
 		BDD253C9655BEFEA48249B69 /* Pods_PokerExUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1D57A59CF2E09AB36C953 /* Pods_PokerExUITests.framework */; };
 		BE36A5D10A6AFB4810CF32D5 /* Pods_PokerExTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DADEC373026D7439953E9E /* Pods_PokerExTests.framework */; };
 		CCD6D1B3247059D8EDE90D47 /* Pods_PokerEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6E75AA16855B5F597FAF5F /* Pods_PokerEx.framework */; };
@@ -45,7 +46,7 @@
 		80B8E3FCAE81A96FCCCC40A1 /* Pods-PokerEx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerEx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerEx/Pods-PokerEx.debug.xcconfig"; sourceTree = "<group>"; };
 		A3DCAA7420B338A800B8D2DA /* PokerEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A3DCAA7920B338A800B8D2DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A3DCAA7C20B338A800B8D2DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3DCAA7E20B338A900B8D2DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3DCAA8120B338A900B8D2DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		A3DCAA9720B338A900B8D2DA /* PokerExUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerExUITests.swift; sourceTree = "<group>"; };
 		A3DCAA9920B338A900B8D2DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3E5FE8620B64B6D001FB457 /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Dev.xcconfig; sourceTree = "<group>"; };
+		A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BA73499014D4BDAE909DC06A /* Pods-PokerExTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerExTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerExTests/Pods-PokerExTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE9CAB823A2798965839C758 /* Pods-PokerExUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerExUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokerExUITests/Pods-PokerExUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FB23FFD074561D32547C5EDF /* Pods-PokerEx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerEx.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokerEx/Pods-PokerEx.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,11 +129,12 @@
 			isa = PBXGroup;
 			children = (
 				A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */,
-				A3DCAA7920B338A800B8D2DA /* ViewController.swift */,
+				A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */,
 				A3DCAA7B20B338A800B8D2DA /* Main.storyboard */,
 				A3DCAA7E20B338A900B8D2DA /* Assets.xcassets */,
 				A3DCAA8020B338A900B8D2DA /* LaunchScreen.storyboard */,
 				A3DCAA8320B338A900B8D2DA /* Info.plist */,
+				A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */,
 			);
 			path = PokerEx;
 			sourceTree = "<group>";
@@ -385,8 +388,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3DCAA7A20B338A800B8D2DA /* ViewController.swift in Sources */,
+				A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */,
 				A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */,
+				A3E5FE8820B6E68E001FB457 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
