@@ -18,17 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let accessToken = AccessToken.current {
-//            if let _ = accessToken.userId {
-//                let rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-//                window?.rootViewController = rootViewController
-//            }
-//        } else {
-//            let rootViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-//            window?.rootViewController = rootViewController
-//        }
-        let rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        window?.rootViewController = rootViewController
+        if let accessToken = AccessToken.current {
+            if let _ = accessToken.userId {
+                let rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
+                window?.rootViewController = rootViewController
+            }
+        } else {
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
+            window?.rootViewController = rootViewController
+        }
+
         return true
     }
 

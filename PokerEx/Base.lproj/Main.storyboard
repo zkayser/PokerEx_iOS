@@ -17,12 +17,51 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dJm-GT-8P4">
+                                <rect key="frame" x="16" y="243.5" width="343" height="84"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUr-Rg-I2U">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="username"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EiL-ez-pGI">
+                                        <rect key="frame" x="0.0" y="54" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="SUr-Rg-I2U" secondAttribute="trailing" id="GrG-D4-KKE"/>
+                                    <constraint firstItem="SUr-Rg-I2U" firstAttribute="leading" secondItem="dJm-GT-8P4" secondAttribute="leading" id="akz-31-yor"/>
+                                    <constraint firstItem="EiL-ez-pGI" firstAttribute="leading" secondItem="dJm-GT-8P4" secondAttribute="leading" id="ayg-u0-1zF"/>
+                                    <constraint firstItem="SUr-Rg-I2U" firstAttribute="leading" secondItem="EiL-ez-pGI" secondAttribute="leading" id="r9p-Sb-DLM"/>
+                                    <constraint firstAttribute="trailing" secondItem="EiL-ez-pGI" secondAttribute="trailing" id="ySx-dx-GUM"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EiL-ez-pGI" secondAttribute="trailing" constant="16" id="6PL-Il-ThU"/>
+                            <constraint firstItem="dJm-GT-8P4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-48" id="feh-AY-CM5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dJm-GT-8P4" secondAttribute="trailing" constant="16" id="h5F-gR-ls8"/>
+                            <constraint firstItem="dJm-GT-8P4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hw8-ok-BrO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SUr-Rg-I2U" secondAttribute="trailing" constant="16" id="zIc-BD-VYZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="password" destination="EiL-ez-pGI" id="JTv-aR-Z2G"/>
+                        <outlet property="stackView" destination="dJm-GT-8P4" id="6b6-gK-EWR"/>
+                        <outlet property="username" destination="SUr-Rg-I2U" id="MRr-t9-37u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
         <!--HomeViewController-->
         <scene sceneID="ObJ-Wq-6ye">
@@ -37,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06K-gZ-h06" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="742" y="34"/>
+            <point key="canvasLocation" x="887" y="134"/>
         </scene>
     </scenes>
 </document>
