@@ -1,45 +1,37 @@
 import UIKit
 import FacebookLogin
+import FacebookCore
 
 class SignInViewController: UIViewController {
-    var loginButton: LoginButton!
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var stackView: UIStackView!
+    
+    private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red:0.00, green:0.59, blue:0.53, alpha:1.0)
-        loginButton = LoginButton(readPermissions: [.publicProfile, .email])
+        containerView.addSubview(loginButton)
+        let containerViewWidth = containerView.bounds.size.width
+        let containerViewHeight = containerView.bounds.size.height
+        loginButton.frame = CGRect(x: 16, y: containerViewHeight / 2, width: containerViewWidth, height: 50)
+        
+        // add a bottom border to text fields
+        usernameField.layer.addSublayer(buildBottomBorderLayer())
+        passwordField.layer.addSublayer(buildBottomBorderLayer())
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loginButton.center.x -= view.bounds.width
-        stackView.center.y -= self.view.bounds.height
+    private func animate() {
+        print("wire up animations here")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        runAnimations()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    private func runAnimations() {
-        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseInOut], animations: {
-            self.stackView.center.y += self.view.bounds.height
-        }, completion: nil)
-        UIView.animate(
-            withDuration: 1,
-            delay: 0.5,
-            options: [.curveEaseInOut],
-            animations: {
-                self.loginButton.center.x += self.view.bounds.width
-                self.stackView.addArrangedSubview(self.loginButton)
-        }, completion: nil)
+    private func buildBottomBorderLayer() -> CALayer {
+        let borderLayer = CALayer()
+        borderLayer.borderColor = UIColor.lightGray.cgColor
+        borderLayer.frame = CGRect(x: 16, y: usernameField.frame.size.height + 5, width: usernameField.frame.size.width, height: 2)
+        borderLayer.borderWidth = 2
+        return borderLayer
     }
 }
 

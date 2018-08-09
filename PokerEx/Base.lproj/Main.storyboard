@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,45 +19,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="dJm-GT-8P4">
-                                <rect key="frame" x="16" y="243.5" width="343" height="84"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caC-vv-CCv">
+                                <rect key="frame" x="16" y="208" width="343" height="250"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUr-Rg-I2U">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkl-Vz-ORt">
+                                        <rect key="frame" x="0.0" y="8" width="343" height="24"/>
+                                        <color key="backgroundColor" name="Teal"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EiL-ez-pGI">
-                                        <rect key="frame" x="0.0" y="54" width="343" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FNJ-Ax-O2x">
+                                        <rect key="frame" x="0.0" y="55" width="343" height="24"/>
+                                        <color key="backgroundColor" name="Teal"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                 </subviews>
+                                <color key="backgroundColor" name="Teal"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="SUr-Rg-I2U" secondAttribute="trailing" id="GrG-D4-KKE"/>
-                                    <constraint firstItem="SUr-Rg-I2U" firstAttribute="leading" secondItem="dJm-GT-8P4" secondAttribute="leading" id="akz-31-yor"/>
-                                    <constraint firstItem="EiL-ez-pGI" firstAttribute="leading" secondItem="dJm-GT-8P4" secondAttribute="leading" id="ayg-u0-1zF"/>
-                                    <constraint firstItem="SUr-Rg-I2U" firstAttribute="leading" secondItem="EiL-ez-pGI" secondAttribute="leading" id="r9p-Sb-DLM"/>
-                                    <constraint firstAttribute="trailing" secondItem="EiL-ez-pGI" secondAttribute="trailing" id="ySx-dx-GUM"/>
+                                    <constraint firstAttribute="trailing" secondItem="FNJ-Ax-O2x" secondAttribute="trailing" id="Cnz-dl-uwI"/>
+                                    <constraint firstItem="tkl-Vz-ORt" firstAttribute="leading" secondItem="caC-vv-CCv" secondAttribute="leading" id="HPx-rL-OgU"/>
+                                    <constraint firstItem="tkl-Vz-ORt" firstAttribute="top" secondItem="caC-vv-CCv" secondAttribute="top" constant="8" id="MfT-4r-eec"/>
+                                    <constraint firstItem="FNJ-Ax-O2x" firstAttribute="leading" secondItem="caC-vv-CCv" secondAttribute="leading" id="UUd-J6-6CV"/>
+                                    <constraint firstAttribute="trailing" secondItem="tkl-Vz-ORt" secondAttribute="trailing" id="jPX-j0-BrH"/>
+                                    <constraint firstAttribute="height" constant="250" id="r3F-Qb-b5I"/>
+                                    <constraint firstItem="FNJ-Ax-O2x" firstAttribute="top" secondItem="tkl-Vz-ORt" secondAttribute="bottom" constant="23" id="wxn-DC-5hB"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Teal"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EiL-ez-pGI" secondAttribute="trailing" constant="16" id="6PL-Il-ThU"/>
-                            <constraint firstItem="dJm-GT-8P4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-48" id="feh-AY-CM5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dJm-GT-8P4" secondAttribute="trailing" constant="16" id="h5F-gR-ls8"/>
-                            <constraint firstItem="dJm-GT-8P4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hw8-ok-BrO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SUr-Rg-I2U" secondAttribute="trailing" constant="16" id="zIc-BD-VYZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="caC-vv-CCv" secondAttribute="trailing" constant="16" id="5by-Ne-fTO"/>
+                            <constraint firstItem="caC-vv-CCv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NQb-7G-hb7"/>
+                            <constraint firstItem="caC-vv-CCv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Nhh-qg-dgd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="password" destination="EiL-ez-pGI" id="JTv-aR-Z2G"/>
-                        <outlet property="stackView" destination="dJm-GT-8P4" id="6b6-gK-EWR"/>
-                        <outlet property="username" destination="SUr-Rg-I2U" id="MRr-t9-37u"/>
+                        <outlet property="containerView" destination="caC-vv-CCv" id="0sY-fD-js6"/>
+                        <outlet property="passwordField" destination="FNJ-Ax-O2x" id="Wcv-zD-VvM"/>
+                        <outlet property="usernameField" destination="tkl-Vz-ORt" id="rdo-SI-JqJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -79,4 +83,9 @@
             <point key="canvasLocation" x="887" y="134"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Teal">
+            <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
