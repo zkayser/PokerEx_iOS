@@ -20,32 +20,72 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caC-vv-CCv">
-                                <rect key="frame" x="16" y="208" width="343" height="250"/>
+                                <rect key="frame" x="16" y="170.5" width="343" height="325"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkl-Vz-ORt">
-                                        <rect key="frame" x="0.0" y="8" width="343" height="24"/>
+                                        <rect key="frame" x="0.0" y="8" width="343" height="50"/>
                                         <color key="backgroundColor" name="Teal"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="gvE-vV-bLB"/>
+                                        </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FNJ-Ax-O2x">
-                                        <rect key="frame" x="0.0" y="55" width="343" height="24"/>
+                                        <rect key="frame" x="0.0" y="83" width="343" height="50"/>
                                         <color key="backgroundColor" name="Teal"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="RMP-kp-LXO"/>
+                                        </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnr-Eo-hao">
+                                        <rect key="frame" x="8" y="183" width="327" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NYC-92-d1j"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <state key="normal" title="Sign In">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ceF-Rw-pZj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWI-yW-oc0">
+                                        <rect key="frame" x="8" y="258" width="327" height="50"/>
+                                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="bzw-et-FLi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pQo-Na-xk9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="Teal"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="FNJ-Ax-O2x" secondAttribute="trailing" id="Cnz-dl-uwI"/>
+                                    <constraint firstItem="XWI-yW-oc0" firstAttribute="top" secondItem="gnr-Eo-hao" secondAttribute="bottom" constant="25" id="Ezr-qE-aEx"/>
                                     <constraint firstItem="tkl-Vz-ORt" firstAttribute="leading" secondItem="caC-vv-CCv" secondAttribute="leading" id="HPx-rL-OgU"/>
                                     <constraint firstItem="tkl-Vz-ORt" firstAttribute="top" secondItem="caC-vv-CCv" secondAttribute="top" constant="8" id="MfT-4r-eec"/>
+                                    <constraint firstItem="gnr-Eo-hao" firstAttribute="leading" secondItem="caC-vv-CCv" secondAttribute="leading" constant="8" id="Mn6-T1-JKv"/>
+                                    <constraint firstItem="gnr-Eo-hao" firstAttribute="top" secondItem="FNJ-Ax-O2x" secondAttribute="bottom" constant="50" id="Qiv-a2-mST"/>
                                     <constraint firstItem="FNJ-Ax-O2x" firstAttribute="leading" secondItem="caC-vv-CCv" secondAttribute="leading" id="UUd-J6-6CV"/>
+                                    <constraint firstItem="XWI-yW-oc0" firstAttribute="leading" secondItem="caC-vv-CCv" secondAttribute="leading" constant="8" id="j8P-PJ-sOP"/>
                                     <constraint firstAttribute="trailing" secondItem="tkl-Vz-ORt" secondAttribute="trailing" id="jPX-j0-BrH"/>
-                                    <constraint firstAttribute="height" constant="250" id="r3F-Qb-b5I"/>
-                                    <constraint firstItem="FNJ-Ax-O2x" firstAttribute="top" secondItem="tkl-Vz-ORt" secondAttribute="bottom" constant="23" id="wxn-DC-5hB"/>
+                                    <constraint firstAttribute="trailing" secondItem="XWI-yW-oc0" secondAttribute="trailing" constant="8" id="nlT-sN-lxo"/>
+                                    <constraint firstAttribute="height" constant="325" id="r3F-Qb-b5I"/>
+                                    <constraint firstAttribute="trailing" secondItem="gnr-Eo-hao" secondAttribute="trailing" constant="8" id="upr-dt-oju"/>
+                                    <constraint firstItem="FNJ-Ax-O2x" firstAttribute="top" secondItem="tkl-Vz-ORt" secondAttribute="bottom" constant="25" id="wxn-DC-5hB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -60,6 +100,8 @@
                     <connections>
                         <outlet property="containerView" destination="caC-vv-CCv" id="0sY-fD-js6"/>
                         <outlet property="passwordField" destination="FNJ-Ax-O2x" id="Wcv-zD-VvM"/>
+                        <outlet property="signInButton" destination="gnr-Eo-hao" id="xCb-Yl-irT"/>
+                        <outlet property="signUpButton" destination="XWI-yW-oc0" id="mlx-GA-Kl9"/>
                         <outlet property="usernameField" destination="tkl-Vz-ORt" id="rdo-SI-JqJ"/>
                     </connections>
                 </viewController>
