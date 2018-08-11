@@ -14,12 +14,24 @@ class SignInViewController: UIViewController {
     private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
     private var username: String?
     private var password: String?
+    private var sessionLogicController: SessionLogicController!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
+    private let signInCallback: (Data?, URLResponse?, Error?) -> Void = { data, response, error in
+        guard let data = data, error == nil else {
+            return
+        }
+        guard let response = response else {
+            print("Couldn't get the response")
+            return
+        }
+        print("Response: \(response)")
+        print("And the data: \(data)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +41,10 @@ class SignInViewController: UIViewController {
         // add tap gesture recognizer to dismiss keyboard when tap anywhere on screen
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        // setup session logic controller
+        sessionLogicController = SessionLogicController()
+        sessionLogicController.delegate = self
         
         // add a bottom border to text fields
         usernameField.layer.addSublayer(buildBottomBorderLayer())
@@ -41,42 +57,7 @@ class SignInViewController: UIViewController {
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        guard let username = self.username, let password = self.password else {
-            renderErrorMessage()
-            return
-        }
-        print("URL: \(NetworkUtils.backendUrl())")
-        guard let url = URL(string: "\(NetworkUtils.backendUrl())api/sessions") else { return }
-        var json = [String: Any]()
-        var player = [String: Any]()
-        player["username"] = username
-        player["password"] = password
-        json["player"] = player
-        
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json, options: [])
-            
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.httpBody = data
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    return
-                }
-                guard let response = response else {
-                    print("Couldn't get the response")
-                    return
-                }
-                print("Response: \(response)")
-                print("And the data: \(data)")
-            }
-            task.resume()
-        } catch {
-            print("Failed...")
-        }
+        sessionLogicController.signIn(username: username, password: password, completion: signInCallback)
     }
     
     @IBAction func signUp(_ sender: Any) {
@@ -88,26 +69,6 @@ class SignInViewController: UIViewController {
     }
     
     // UI Helpers
-    private func renderErrorMessage() {
-        if (username == nil) {
-            errorLabel(for: "username", on: usernameField)
-        }
-    
-        if (password == nil) {
-            errorLabel(for: "password", on: passwordField)
-        }
-    }
-    
-    private func errorLabel(for property: String, on textField: UITextField) {
-        let label = UILabel()
-        label.text = "\(property.capitalized) must not be blank"
-        label.textColor = .red
-        label.textAlignment = .center
-        label.font.withSize(14)
-        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
-        containerView.addSubview(label)
-    }
-    
     private func buildBottomBorderLayer() -> CALayer {
         let borderLayer = CALayer()
         borderLayer.borderColor = UIColor.lightGray.cgColor
@@ -134,6 +95,28 @@ extension SignInViewController: UITextFieldDelegate {
         } else {
             password = textField.text
         }
+    }
+}
+
+extension SignInViewController: SessionLogicControllerDelegate {
+    func renderErrorMessage() {
+        if (username == nil) {
+            errorLabel(for: "username", on: usernameField)
+        }
+        
+        if (password == nil) {
+            errorLabel(for: "password", on: passwordField)
+        }
+    }
+    
+    private func errorLabel(for property: String, on textField: UITextField) {
+        let label = UILabel()
+        label.text = "\(property.capitalized) must not be blank"
+        label.textColor = .red
+        label.textAlignment = .center
+        label.font.withSize(14)
+        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
+        containerView.addSubview(label)
     }
 }
 

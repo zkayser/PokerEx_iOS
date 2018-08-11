@@ -17,6 +17,7 @@
 		A3E5FE8820B6E68E001FB457 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */; };
 		A3FA95FA20C30C770087EE0A /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FA95F920C30C770087EE0A /* Authentication.swift */; };
 		A3FEB460211F9D120005C518 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEB45F211F9D120005C518 /* NetworkUtils.swift */; };
+		A3FEB463211FA1F60005C518 /* SessionLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEB462211FA1F60005C518 /* SessionLogicController.swift */; };
 		BDD253C9655BEFEA48249B69 /* Pods_PokerExUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D1D57A59CF2E09AB36C953 /* Pods_PokerExUITests.framework */; };
 		BE36A5D10A6AFB4810CF32D5 /* Pods_PokerExTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DADEC373026D7439953E9E /* Pods_PokerExTests.framework */; };
 		CCD6D1B3247059D8EDE90D47 /* Pods_PokerEx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6E75AA16855B5F597FAF5F /* Pods_PokerEx.framework */; };
@@ -63,6 +64,7 @@
 		A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A3FA95F920C30C770087EE0A /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		A3FEB45F211F9D120005C518 /* NetworkUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtils.swift; sourceTree = "<group>"; };
+		A3FEB462211FA1F60005C518 /* SessionLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLogicController.swift; sourceTree = "<group>"; };
 		BA73499014D4BDAE909DC06A /* Pods-PokerExTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerExTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerExTests/Pods-PokerExTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE9CAB823A2798965839C758 /* Pods-PokerExUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerExUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokerExUITests/Pods-PokerExUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FB23FFD074561D32547C5EDF /* Pods-PokerEx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerEx.release.xcconfig"; path = "Pods/Target Support Files/Pods-PokerEx/Pods-PokerEx.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,14 +134,13 @@
 		A3DCAA7620B338A800B8D2DA /* PokerEx */ = {
 			isa = PBXGroup;
 			children = (
+				A3FEB461211FA1980005C518 /* Sessions */,
 				A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */,
-				A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */,
 				A3DCAA7B20B338A800B8D2DA /* Main.storyboard */,
 				A3DCAA7E20B338A900B8D2DA /* Assets.xcassets */,
 				A3DCAA8020B338A900B8D2DA /* LaunchScreen.storyboard */,
 				A3DCAA8320B338A900B8D2DA /* Info.plist */,
 				A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */,
-				A3FA95F920C30C770087EE0A /* Authentication.swift */,
 				A3FEB45F211F9D120005C518 /* NetworkUtils.swift */,
 			);
 			path = PokerEx;
@@ -161,6 +162,16 @@
 				A3DCAA9920B338A900B8D2DA /* Info.plist */,
 			);
 			path = PokerExUITests;
+			sourceTree = "<group>";
+		};
+		A3FEB461211FA1980005C518 /* Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				A3FA95F920C30C770087EE0A /* Authentication.swift */,
+				A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */,
+				A3FEB462211FA1F60005C518 /* SessionLogicController.swift */,
+			);
+			path = Sessions;
 			sourceTree = "<group>";
 		};
 		AC345849FB1793F8C96B2BF2 /* Pods */ = {
@@ -397,6 +408,7 @@
 				A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */,
 				A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */,
 				A3FEB460211F9D120005C518 /* NetworkUtils.swift in Sources */,
+				A3FEB463211FA1F60005C518 /* SessionLogicController.swift in Sources */,
 				A3E5FE8820B6E68E001FB457 /* HomeViewController.swift in Sources */,
 				A3FA95FA20C30C770087EE0A /* Authentication.swift in Sources */,
 			);
