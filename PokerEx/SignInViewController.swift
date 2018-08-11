@@ -45,7 +45,8 @@ class SignInViewController: UIViewController {
             renderErrorMessage()
             return
         }
-        guard let url = URL(string: "http://localhost:8080/api/sessions") else { return }
+        print("URL: \(NetworkUtils.backendUrl())")
+        guard let url = URL(string: "\(NetworkUtils.backendUrl())api/sessions") else { return }
         var json = [String: Any]()
         var player = [String: Any]()
         player["username"] = username
