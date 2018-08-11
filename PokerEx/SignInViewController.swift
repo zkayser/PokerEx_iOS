@@ -3,6 +3,7 @@ import FacebookLogin
 import FacebookCore
 
 fileprivate let leftMargin: CGFloat = 16
+fileprivate let errorLabelMargin: CGFloat = 12
 fileprivate let topMargin: CGFloat = 8
 fileprivate let verticalSpacing: CGFloat = 25
 fileprivate let buttonHeight: CGFloat = 50
@@ -27,7 +28,6 @@ class SignInViewController: UIViewController {
         
         // add tap gesture recognizer to dismiss keyboard when tap anywhere on screen
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        // add tap gesture recognizer to view
         view.addGestureRecognizer(tap)
         
         // add a bottom border to text fields
@@ -41,7 +41,10 @@ class SignInViewController: UIViewController {
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        guard let username = self.username, let password = self.password else { return }
+        guard let username = self.username, let password = self.password else {
+            renderErrorMessage()
+            return
+        }
         guard let url = URL(string: "http://localhost:8080/api/sessions") else { return }
         var json = [String: Any]()
         var player = [String: Any]()
@@ -81,6 +84,27 @@ class SignInViewController: UIViewController {
     
     private func animate() {
         print("wire up animations here")
+    }
+    
+    // UI Helpers
+    private func renderErrorMessage() {
+        if (username == nil) {
+            errorLabel(for: "username", on: usernameField)
+        }
+    
+        if (password == nil) {
+            errorLabel(for: "password", on: passwordField)
+        }
+    }
+    
+    private func errorLabel(for property: String, on textField: UITextField) {
+        let label = UILabel()
+        label.text = "\(property.capitalized) must not be blank"
+        label.textColor = .red
+        label.textAlignment = .center
+        label.font.withSize(14)
+        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
+        containerView.addSubview(label)
     }
     
     private func buildBottomBorderLayer() -> CALayer {
