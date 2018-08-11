@@ -11,6 +11,8 @@ fileprivate let borderWidth: CGFloat = 2
 class SignInViewController: UIViewController {
     
     private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
+    private var username: String?
+    private var password: String?
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -23,14 +25,54 @@ class SignInViewController: UIViewController {
         containerView.addSubview(loginButton)
         loginButton.frame = CGRect(x: leftMargin - 8, y: containerView.bounds.size.height, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
         
+        // add tap gesture recognizer to dismiss keyboard when tap anywhere on screen
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        // add tap gesture recognizer to view
+        view.addGestureRecognizer(tap)
+        
         // add a bottom border to text fields
         usernameField.layer.addSublayer(buildBottomBorderLayer())
         passwordField.layer.addSublayer(buildBottomBorderLayer())
+        
+        // set self as the delegate for text fields
+        usernameField.delegate = self
+        passwordField.delegate = self
     }
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        print("pressed sign in")
+        guard let username = self.username, let password = self.password else { return }
+        guard let url = URL(string: "http://localhost:8080/api/sessions") else { return }
+        var json = [String: Any]()
+        var player = [String: Any]()
+        player["username"] = username
+        player["password"] = password
+        json["player"] = player
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json, options: [])
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = data
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                guard let response = response else {
+                    print("Couldn't get the response")
+                    return
+                }
+                print("Response: \(response)")
+                print("And the data: \(data)")
+            }
+            task.resume()
+        } catch {
+            print("Failed...")
+        }
     }
     
     @IBAction func signUp(_ sender: Any) {
@@ -47,6 +89,26 @@ class SignInViewController: UIViewController {
         borderLayer.frame = CGRect(x: leftMargin, y: usernameField.frame.size.height + 5, width: UIScreen.main.bounds.width - (4 * leftMargin), height: borderWidth)
         borderLayer.borderWidth = borderWidth
         return borderLayer
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == usernameField {
+            username = textField.text
+        } else {
+            password = textField.text
+        }
     }
 }
 
