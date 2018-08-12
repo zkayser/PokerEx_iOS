@@ -1,19 +1,15 @@
 import Foundation
 
-protocol SessionLogicControllerDelegate {
-    func renderErrorMessage()
-}
-
 typealias DataTaskCallback = (Data?, URLResponse?, Error?) -> Void
-
 class SessionLogicController {
     
-    private let baseUrl = NetworkUtils.backendUrl()
-    var delegate: SessionLogicControllerDelegate?
+    static let shared = SessionLogicController()
     
-    func signIn(username: String?, password: String?, completion: @escaping DataTaskCallback) {
+    private let baseUrl = NetworkUtils.backendUrl()
+    
+    func signIn(username: String?, password: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
         guard let username = username, let password = password else {
-            delegate?.renderErrorMessage()
+            errorCallback?()
             return
         }
         

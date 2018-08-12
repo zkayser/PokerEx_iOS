@@ -25,7 +25,7 @@ class SignInViewController: UIViewController {
         guard let data = data, error == nil else {
             return
         }
-        guard let response = response else {
+        guard let response = response as? HTTPURLResponse else {
             print("Couldn't get the response")
             return
         }
@@ -43,8 +43,7 @@ class SignInViewController: UIViewController {
         view.addGestureRecognizer(tap)
         
         // setup session logic controller
-        sessionLogicController = SessionLogicController()
-        sessionLogicController.delegate = self
+        sessionLogicController = SessionLogicController.shared
         
         // add a bottom border to text fields
         usernameField.layer.addSublayer(buildBottomBorderLayer())
@@ -57,7 +56,7 @@ class SignInViewController: UIViewController {
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        sessionLogicController.signIn(username: username, password: password, completion: signInCallback)
+        sessionLogicController.signIn(username: username, password: password, errorCallback: renderErrorMessage, completion: signInCallback)
     }
     
     @IBAction func signUp(_ sender: Any) {
@@ -69,6 +68,26 @@ class SignInViewController: UIViewController {
     }
     
     // UI Helpers
+    func renderErrorMessage() {
+        if (username == nil) {
+            errorLabel(for: "username", on: usernameField)
+        }
+        
+        if (password == nil) {
+            errorLabel(for: "password", on: passwordField)
+        }
+    }
+    
+    private func errorLabel(for property: String, on textField: UITextField) {
+        let label = UILabel()
+        label.text = "\(property.capitalized) must not be blank"
+        label.textColor = .red
+        label.textAlignment = .center
+        label.font.withSize(14)
+        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
+        containerView.addSubview(label)
+    }
+    
     private func buildBottomBorderLayer() -> CALayer {
         let borderLayer = CALayer()
         borderLayer.borderColor = UIColor.lightGray.cgColor
@@ -95,28 +114,6 @@ extension SignInViewController: UITextFieldDelegate {
         } else {
             password = textField.text
         }
-    }
-}
-
-extension SignInViewController: SessionLogicControllerDelegate {
-    func renderErrorMessage() {
-        if (username == nil) {
-            errorLabel(for: "username", on: usernameField)
-        }
-        
-        if (password == nil) {
-            errorLabel(for: "password", on: passwordField)
-        }
-    }
-    
-    private func errorLabel(for property: String, on textField: UITextField) {
-        let label = UILabel()
-        label.text = "\(property.capitalized) must not be blank"
-        label.textColor = .red
-        label.textAlignment = .center
-        label.font.withSize(14)
-        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
-        containerView.addSubview(label)
     }
 }
 
