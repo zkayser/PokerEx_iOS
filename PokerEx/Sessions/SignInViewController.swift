@@ -2,6 +2,7 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 
+// Constants
 fileprivate let leftMargin: CGFloat = 16
 fileprivate let errorLabelMargin: CGFloat = 12
 fileprivate let topMargin: CGFloat = 8
@@ -11,13 +12,13 @@ fileprivate let borderWidth: CGFloat = 2
 fileprivate let homeViewSegue = "HomeViewSegue"
 
 class SignInViewController: UIViewController {
-    
-    weak var weakSelf: SignInViewController?
+
     private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
     private var username: String?
     private var password: String?
     private var sessionLogicController: SessionLogicController!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var socialLoginContainer: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
@@ -28,7 +29,7 @@ class SignInViewController: UIViewController {
             // Render useful error message here
             return
         }
-        
+
         UserDefaults.standard.set(data, forKey: kSession)
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: homeViewSegue, sender: nil)
@@ -37,9 +38,9 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weakSelf = self
-        containerView.addSubview(loginButton)
-        loginButton.frame = CGRect(x: leftMargin - 8, y: containerView.bounds.size.height, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
+    
+        socialLoginContainer.addSubview(loginButton)
+        loginButton.frame = CGRect(x: leftMargin / 2, y: 0, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
         
         // add tap gesture recognizer to dismiss keyboard when tap anywhere on screen
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -55,6 +56,12 @@ class SignInViewController: UIViewController {
         // set self as the delegate for text fields
         usernameField.delegate = self
         passwordField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let _ = AccessToken.current {
+            sessionLogicController.facebookSignIn(errorCallback: renderFacebookErrorMessage, completion: signInCallback)
+        }
     }
     
     override func performSegue(withIdentifier identifier: String, sender: Any?) {
@@ -87,6 +94,15 @@ class SignInViewController: UIViewController {
         if (password == nil) {
             errorLabel(for: "password", on: passwordField)
         }
+    }
+    
+    func renderFacebookErrorMessage() {
+        let label = UILabel()
+        label.text = "We're sorry. Something went wrong with your Facebook login. Please try again shortly."
+        label.textColor = .red
+        label.font.withSize(14)
+        label.frame = CGRect(x: leftMargin, y: topMargin, width: view.frame.width, height: verticalSpacing)
+        view.addSubview(label)
     }
     
     private func errorLabel(for property: String, on textField: UITextField) {

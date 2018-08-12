@@ -1,4 +1,5 @@
 import Foundation
+import FacebookCore
 
 typealias DataTaskCallback = (Data?, URLResponse?, Error?) -> Void
 class SessionLogicController {
@@ -21,12 +22,47 @@ class SessionLogicController {
         URLSession.shared.dataTask(with: buildSignInRequest(data: data, url: url), completionHandler: completion).resume()
     }
     
+    func facebookSignIn(errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
+        GraphRequest(graphPath: "me").start { response, result in
+            switch (result) {
+            case .success(let graphResponse):
+                self.fireFacebookSignInRequest(username: (graphResponse.dictionaryValue?["name"] as? String),
+                                          facebookId: (graphResponse.dictionaryValue?["id"] as? String),
+                                          errorCallback: errorCallback,
+                                          completion: completion
+                                         )
+                default: errorCallback?()
+            }
+        }
+    }
+    
+    private func fireFacebookSignInRequest(username: String?, facebookId: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
+        guard let username = username, let facebookId = facebookId else {
+            errorCallback?()
+            return
+        }
+        
+        guard let url = URL(string: "\(baseUrl)api/auth") else { return }
+        let json = buildFacebookSignInPayload(username: username, facebookId: facebookId)
+        
+        guard let data = try? JSONSerialization.data(withJSONObject: json, options: []) else { return }
+        
+        URLSession.shared.dataTask(with: buildSignInRequest(data: data, url: url), completionHandler: completion).resume()
+    }
+    
     private func buildSignInPayload(username: String, password: String) -> [String: Any] {
         var json = [String: Any]()
         var player = [String: Any]()
         player["username"] = username
         player["password"] = password
         json["player"] = player
+        return json
+    }
+    
+    private func buildFacebookSignInPayload(username: String, facebookId: String) -> [String: Any] {
+        var json = [String: Any]()
+        json["name"] = username
+        json["facebook_id"] = facebookId
         return json
     }
     

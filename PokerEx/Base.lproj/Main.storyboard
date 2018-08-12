@@ -88,12 +88,22 @@
                                     <constraint firstItem="FNJ-Ax-O2x" firstAttribute="top" secondItem="tkl-Vz-ORt" secondAttribute="bottom" constant="25" id="wxn-DC-5hB"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mb-ft-Nme">
+                                <rect key="frame" x="16" y="503.5" width="343" height="60"/>
+                                <color key="backgroundColor" name="Teal"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="61S-hl-Wp7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="Teal"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="caC-vv-CCv" secondAttribute="trailing" constant="16" id="5by-Ne-fTO"/>
                             <constraint firstItem="caC-vv-CCv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NQb-7G-hb7"/>
                             <constraint firstItem="caC-vv-CCv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Nhh-qg-dgd"/>
+                            <constraint firstItem="1Mb-ft-Nme" firstAttribute="top" secondItem="caC-vv-CCv" secondAttribute="bottom" constant="8" id="UoD-bI-7VB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Mb-ft-Nme" secondAttribute="trailing" constant="16" id="W7m-1Z-XzG"/>
+                            <constraint firstItem="1Mb-ft-Nme" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jQ2-JH-HYt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -102,6 +112,7 @@
                         <outlet property="passwordField" destination="FNJ-Ax-O2x" id="Wcv-zD-VvM"/>
                         <outlet property="signInButton" destination="gnr-Eo-hao" id="xCb-Yl-irT"/>
                         <outlet property="signUpButton" destination="XWI-yW-oc0" id="mlx-GA-Kl9"/>
+                        <outlet property="socialLoginContainer" destination="1Mb-ft-Nme" id="EGA-qw-kRU"/>
                         <outlet property="usernameField" destination="tkl-Vz-ORt" id="rdo-SI-JqJ"/>
                     </connections>
                 </viewController>
@@ -138,6 +149,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Teal">
+            <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Teal">
             <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
