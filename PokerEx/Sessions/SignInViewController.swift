@@ -8,9 +8,11 @@ fileprivate let topMargin: CGFloat = 8
 fileprivate let verticalSpacing: CGFloat = 25
 fileprivate let buttonHeight: CGFloat = 50
 fileprivate let borderWidth: CGFloat = 2
+fileprivate let homeViewSegue = "HomeViewSegue"
 
 class SignInViewController: UIViewController {
     
+    weak var weakSelf: SignInViewController?
     private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
     private var username: String?
     private var password: String?
@@ -21,21 +23,21 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-    private let signInCallback: (Data?, URLResponse?, Error?) -> Void = { data, response, error in
+    lazy private var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [unowned self] data, response, error in
         guard let data = data, let response = response, error == nil else {
             // Render useful error message here
             return
         }
-       
-        let decoder = JSONDecoder()
-        if let session = try? decoder.decode(Session.self, from: data) {
-            UserDefaults.standard.set(data, forKey: "session")
-            print("Saved user session: \(session)")
+        
+        UserDefaults.standard.set(data, forKey: kSession)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: homeViewSegue, sender: nil)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        weakSelf = self
         containerView.addSubview(loginButton)
         loginButton.frame = CGRect(x: leftMargin - 8, y: containerView.bounds.size.height, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
         
@@ -53,6 +55,14 @@ class SignInViewController: UIViewController {
         // set self as the delegate for text fields
         usernameField.delegate = self
         passwordField.delegate = self
+    }
+    
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+        if identifier == homeViewSegue {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let homeVc = storyboard.instantiateViewController(withIdentifier: kHomeViewController)
+            self.present(homeVc, animated: false)
+        }
     }
     
     // Actions

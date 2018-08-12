@@ -1,35 +1,16 @@
-//
-//  HomeViewController.swift
-//  PokerEx
-//
-//  Created by Kayser, Zack (NonEmp) on 5/24/18.
-//  Copyright © 2018 Kayser, Zack. All rights reserved.
-//
-
 import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var greetingLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if let savedSession = UserDefaults.standard.object(forKey: kSession) as? Data {
+            let decoder = JSONDecoder()
+            if let session = try? decoder.decode(Session.self, from: savedSession) {
+                greetingLabel.text = "Welcome to PokerEx, \(session.player.username). You have \(session.player.chips) chips remaining."
+            }
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    //  MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
