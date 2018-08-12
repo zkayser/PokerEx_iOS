@@ -22,15 +22,16 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     
     private let signInCallback: (Data?, URLResponse?, Error?) -> Void = { data, response, error in
-        guard let data = data, error == nil else {
+        guard let data = data, let response = response, error == nil else {
+            // Render useful error message here
             return
         }
-        guard let response = response as? HTTPURLResponse else {
-            print("Couldn't get the response")
-            return
+       
+        let decoder = JSONDecoder()
+        if let session = try? decoder.decode(Session.self, from: data) {
+            UserDefaults.standard.set(data, forKey: "session")
+            print("Saved user session: \(session)")
         }
-        print("Response: \(response)")
-        print("And the data: \(data)")
     }
     
     override func viewDidLoad() {
