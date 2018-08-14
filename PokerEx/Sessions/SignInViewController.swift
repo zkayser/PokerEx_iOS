@@ -24,15 +24,16 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-    lazy private var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [unowned self] data, response, error in
+    lazy private var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [weak self] data, response, error in
+        guard let strongSelf = self else { return }
         guard let data = data, let response = response, error == nil else {
-            // Render useful error message here
+            strongSelf.renderBasicErrorMessage()
             return
         }
 
         UserDefaults.standard.set(data, forKey: kSession)
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: homeViewSegue, sender: nil)
+            strongSelf.performSegue(withIdentifier: homeViewSegue, sender: nil)
         }
     }
     
@@ -60,7 +61,7 @@ class SignInViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if let _ = AccessToken.current {
-            sessionLogicController.facebookSignIn(errorCallback: renderFacebookErrorMessage, completion: signInCallback)
+            sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: signInCallback)
         }
     }
     
@@ -96,9 +97,9 @@ class SignInViewController: UIViewController {
         }
     }
     
-    func renderFacebookErrorMessage() {
+    func renderBasicErrorMessage() {
         let label = UILabel()
-        label.text = "We're sorry. Something went wrong with your Facebook login. Please try again shortly."
+        label.text = "We're sorry. Something went wrong with your login. Please try again shortly."
         label.textColor = .red
         label.font.withSize(14)
         label.frame = CGRect(x: leftMargin, y: topMargin, width: view.frame.width, height: verticalSpacing)
