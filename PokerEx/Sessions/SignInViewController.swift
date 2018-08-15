@@ -17,6 +17,7 @@ class SignInViewController: UIViewController {
     private var username: String?
     private var password: String?
     private var sessionLogicController: SessionLogicController!
+    private var authentication: Authentication!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var socialLoginContainer: UIView!
     @IBOutlet weak var usernameField: UITextField!
@@ -50,6 +51,9 @@ class SignInViewController: UIViewController {
         // setup session logic controller
         sessionLogicController = SessionLogicController.shared
         
+        // setup authentication handler
+        authentication = Authentication.shared
+        
         // add a bottom border to text fields
         usernameField.layer.addSublayer(buildBottomBorderLayer())
         passwordField.layer.addSublayer(buildBottomBorderLayer())
@@ -60,8 +64,10 @@ class SignInViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let _ = AccessToken.current {
-            sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: signInCallback)
+        switch (authentication.credentials) {
+            case .session: performSegue(withIdentifier: homeViewSegue, sender: nil)
+            case .facebook: sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: signInCallback)
+            case .none: return
         }
     }
     
