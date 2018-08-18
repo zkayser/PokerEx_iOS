@@ -27,7 +27,7 @@ class SignInViewControllerTests: XCTestCase {
                                   expectedContentLength: 0,
                                   textEncodingName: "utf-8")
     
-    let error = MockError.error("This is an error")
+    let error = MockError.error("Login failed")
     
     var signInFailed: Bool = false
     var assignedDataToUserDefaults: Bool = false
@@ -72,7 +72,7 @@ class SignInViewControllerTests: XCTestCase {
     func test_withFailureOnFacebookOAuthRequest_viewWillAppearCallsErrorCallback() {
         auth.credentials = .facebook
         // Mock unsuccessful network response
-        fakeSessionLogicController.mockNetworkResponse(data: nil, response: nil, error: MockError.error("Login failed"))
+        fakeSessionLogicController.mockNetworkResponse(data: nil, response: nil, error: error)
         fakeSessionLogicController.didFBGraphResponseSucceed = true
         signInViewController.viewWillAppear(false)
         XCTAssert(fakeSessionLogicController.wasCompletionInvoked)
@@ -107,7 +107,7 @@ class SignInViewControllerTests: XCTestCase {
         signInViewController.username = "someUser"
         signInViewController.password = "password"
         // Mock unsuccessful network response
-        fakeSessionLogicController.mockNetworkResponse(data: nil, response: nil, error: MockError.error("Login failed"))
+        fakeSessionLogicController.mockNetworkResponse(data: nil, response: nil, error: error)
         signInViewController.signIn(UIButton())
         XCTAssert(fakeSessionLogicController.wasCompletionInvoked)
         XCTAssert(signInFailed)
