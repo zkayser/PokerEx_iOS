@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36001192128982900B9E381 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36001182128982900B9E381 /* SignInViewControllerTests.swift */; };
+		A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011B212898A900B9E381 /* FakeSessionLogicController.swift */; };
+		A360011E21289DD300B9E381 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011D21289DD300B9E381 /* MockError.swift */; };
+		A36001202128A1AD00B9E381 /* FakeAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011F2128A1AD00B9E381 /* FakeAuth.swift */; };
 		A3BB323D211FD39300B14A2D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323C211FD39300B14A2D /* Session.swift */; };
 		A3BB323F2120A88600B14A2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323E2120A88600B14A2D /* Constants.swift */; };
 		A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */; };
@@ -49,6 +53,10 @@
 		38D1D57A59CF2E09AB36C953 /* Pods_PokerExUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerExUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6E75AA16855B5F597FAF5F /* Pods_PokerEx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerEx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B8E3FCAE81A96FCCCC40A1 /* Pods-PokerEx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerEx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerEx/Pods-PokerEx.debug.xcconfig"; sourceTree = "<group>"; };
+		A36001182128982900B9E381 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
+		A360011B212898A900B9E381 /* FakeSessionLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionLogicController.swift; sourceTree = "<group>"; };
+		A360011D21289DD300B9E381 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
+		A360011F2128A1AD00B9E381 /* FakeAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuth.swift; sourceTree = "<group>"; };
 		A3BB323C211FD39300B14A2D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A3BB323E2120A88600B14A2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3DCAA7420B338A800B8D2DA /* PokerEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +120,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A36001172128981100B9E381 /* Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				A36001182128982900B9E381 /* SignInViewControllerTests.swift */,
+			);
+			path = Sessions;
+			sourceTree = "<group>";
+		};
+		A360011A2128989500B9E381 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A360011B212898A900B9E381 /* FakeSessionLogicController.swift */,
+				A360011D21289DD300B9E381 /* MockError.swift */,
+				A360011F2128A1AD00B9E381 /* FakeAuth.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		A3BB323B211FD37100B14A2D /* Players */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +189,8 @@
 		A3DCAA8B20B338A900B8D2DA /* PokerExTests */ = {
 			isa = PBXGroup;
 			children = (
+				A360011A2128989500B9E381 /* Mocks */,
+				A36001172128981100B9E381 /* Sessions */,
 				A3DCAA8C20B338A900B8D2DA /* PokerExTests.swift */,
 				A3DCAA8E20B338A900B8D2DA /* Info.plist */,
 			);
@@ -434,6 +462,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */,
+				A36001202128A1AD00B9E381 /* FakeAuth.swift in Sources */,
+				A36001192128982900B9E381 /* SignInViewControllerTests.swift in Sources */,
+				A360011E21289DD300B9E381 /* MockError.swift in Sources */,
 				A3DCAA8D20B338A900B8D2DA /* PokerExTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

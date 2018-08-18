@@ -14,10 +14,10 @@ fileprivate let homeViewSegue = "HomeViewSegue"
 class SignInViewController: UIViewController {
 
     private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
-    private var username: String?
-    private var password: String?
-    private var sessionLogicController: SessionLogicController!
-    private var authentication: Authentication!
+    var username: String?
+    var password: String?
+    var sessionLogicController: SessionLogicControllerProtocol!
+    var authentication: AuthenticationProtocol!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var socialLoginContainer: UIView!
     @IBOutlet weak var usernameField: UITextField!
@@ -25,7 +25,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-    lazy private var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [weak self] data, response, error in
+    lazy var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [weak self] data, response, error in
         guard let strongSelf = self else { return }
         guard let data = data, let response = response, error == nil else {
             strongSelf.renderBasicErrorMessage()
@@ -64,7 +64,7 @@ class SignInViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        switch (authentication.credentials) {
+        switch (authentication.getCredentials()) {
             case .session: performSegue(withIdentifier: homeViewSegue, sender: nil)
             case .facebook: sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: signInCallback)
             case .none: return

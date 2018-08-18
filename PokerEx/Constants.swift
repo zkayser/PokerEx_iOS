@@ -1,4 +1,4 @@
 import Foundation
 
-let kSession = "session"
+let kSession = "POKER_EX_SESSION"
 let kHomeViewController = "HomeViewController"

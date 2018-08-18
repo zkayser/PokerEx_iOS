@@ -9,6 +9,18 @@ struct Session: Codable {
         let username: String
         let chips: Int
     }
+    
+    static func decode(data: Data) -> Session? {
+        return try? JSONDecoder().decode(Session.self, from: data)
+    }
+    
+    static func decode(data: Data?) -> Session? {
+        if let data = data {
+            return decode(data: data)
+        } else {
+            return nil
+        }
+    }
 }
 
 

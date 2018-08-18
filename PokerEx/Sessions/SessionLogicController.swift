@@ -2,7 +2,13 @@ import Foundation
 import FacebookCore
 
 typealias DataTaskCallback = (Data?, URLResponse?, Error?) -> Void
-class SessionLogicController {
+
+protocol SessionLogicControllerProtocol {
+    func signIn(username: String?, password: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
+    func facebookSignIn(errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
+}
+
+class SessionLogicController: SessionLogicControllerProtocol {
     
     static let shared = SessionLogicController()
     
