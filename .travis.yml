@@ -1,0 +1,4 @@
+language: swift
+xcode_workspace: PokerEx.xcworkspace
+xcode_scheme: PokerExTests
+xcode_destination: platform=iOS Simulator,OS=11.4,name=iPad Pro (9.7-inch)
