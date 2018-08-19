@@ -58,7 +58,7 @@ class SignInViewControllerTests: XCTestCase {
         dataAssignedToUserDefaults = nil
     }
     
-    func test_withFacebookCredentials_viewWillAppearCallsFBLogin() {
+    func test_givenFacebookCredentials_viewWillAppearCallsFBLogin() {
         auth.credentials = .facebook
         // Mock successful network response
         fakeSessionLogicController.mockNetworkResponse(data: sessionData, response: urlResponse, error: nil)
@@ -69,7 +69,7 @@ class SignInViewControllerTests: XCTestCase {
         XCTAssertEqual(dataAssignedToUserDefaults, sessionData)
     }
     
-    func test_withFailureOnFacebookOAuthRequest_viewWillAppearCallsErrorCallback() {
+    func test_givenFailureOnFacebookOAuthRequest_viewWillAppearCallsErrorCallback() {
         auth.credentials = .facebook
         // Mock unsuccessful network response
         fakeSessionLogicController.mockNetworkResponse(data: nil, response: nil, error: error)
@@ -79,7 +79,7 @@ class SignInViewControllerTests: XCTestCase {
         XCTAssert(signInFailed)
     }
     
-    func test_withFacebookGraphRequestFailure_viewWillAppearInvokesFBErrorCallback() {
+    func test_givenFacebookGraphRequestFailure_viewWillAppearInvokesFBErrorCallback() {
         auth.credentials = .facebook
         fakeSessionLogicController.didFBGraphResponseSucceed = false
         signInViewController.viewWillAppear(false)

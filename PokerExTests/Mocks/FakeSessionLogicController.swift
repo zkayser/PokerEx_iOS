@@ -5,11 +5,6 @@ class FakeSessionLogicController: SessionLogicControllerProtocol {
     var wasErrorCallbackInvoked: Bool = false
     var wasCompletionInvoked: Bool = false
     var didFBGraphResponseSucceed: Bool = true
-    let session = Session(player:
-        Session.SessionPlayer(email: "example@example.com",
-                              token: "someToken",
-                              username: "user",
-                              chips: 1000))
     var sessionData: Data?
     var response: URLResponse?
     var error: Error?
