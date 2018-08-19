@@ -11,6 +11,8 @@
 		A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011B212898A900B9E381 /* FakeSessionLogicController.swift */; };
 		A360011E21289DD300B9E381 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011D21289DD300B9E381 /* MockError.swift */; };
 		A36001202128A1AD00B9E381 /* FakeAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011F2128A1AD00B9E381 /* FakeAuth.swift */; };
+		A36001222129C95100B9E381 /* SignInNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36001212129C95100B9E381 /* SignInNetworkingTests.swift */; };
+		A36001242129CB2500B9E381 /* SignInNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36001232129CB2500B9E381 /* SignInNetworking.swift */; };
 		A3BB323D211FD39300B14A2D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323C211FD39300B14A2D /* Session.swift */; };
 		A3BB323F2120A88600B14A2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323E2120A88600B14A2D /* Constants.swift */; };
 		A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */; };
@@ -57,6 +59,8 @@
 		A360011B212898A900B9E381 /* FakeSessionLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionLogicController.swift; sourceTree = "<group>"; };
 		A360011D21289DD300B9E381 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
 		A360011F2128A1AD00B9E381 /* FakeAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAuth.swift; sourceTree = "<group>"; };
+		A36001212129C95100B9E381 /* SignInNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInNetworkingTests.swift; sourceTree = "<group>"; };
+		A36001232129CB2500B9E381 /* SignInNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInNetworking.swift; sourceTree = "<group>"; };
 		A3BB323C211FD39300B14A2D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A3BB323E2120A88600B14A2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3DCAA7420B338A800B8D2DA /* PokerEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				A36001182128982900B9E381 /* SignInViewControllerTests.swift */,
+				A36001212129C95100B9E381 /* SignInNetworkingTests.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				A3FA95F920C30C770087EE0A /* Authentication.swift */,
 				A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */,
 				A3FEB462211FA1F60005C518 /* SessionLogicController.swift */,
+				A36001232129CB2500B9E381 /* SignInNetworking.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3BB323D211FD39300B14A2D /* Session.swift in Sources */,
+				A36001242129CB2500B9E381 /* SignInNetworking.swift in Sources */,
 				A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */,
 				A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */,
 				A3FEB460211F9D120005C518 /* NetworkUtils.swift in Sources */,
@@ -465,6 +472,7 @@
 				A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */,
 				A36001202128A1AD00B9E381 /* FakeAuth.swift in Sources */,
 				A36001192128982900B9E381 /* SignInViewControllerTests.swift in Sources */,
+				A36001222129C95100B9E381 /* SignInNetworkingTests.swift in Sources */,
 				A360011E21289DD300B9E381 /* MockError.swift in Sources */,
 				A3DCAA8D20B338A900B8D2DA /* PokerExTests.swift in Sources */,
 			);
