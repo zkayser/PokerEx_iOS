@@ -1,4 +1,3 @@
 language: swift
-xcode_workspace: PokerEx.xcworkspace
-xcode_scheme: PokerExTests
-xcode_destination: platform=iOS Simulator,OS=11.4,name=iPad Pro (9.7-inch)
+script:
+  - xcodebuild clean test -workspace PokerEx.xcworkspace -scheme PokerEx -destination "platform=iOS Simulator,name=iPhone X,OS=11.3"
