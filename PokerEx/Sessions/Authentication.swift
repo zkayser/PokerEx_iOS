@@ -14,14 +14,9 @@ protocol AuthenticationProtocol {
 class Authentication: AuthenticationProtocol {
     
     static var shared: Authentication = Authentication()
-    let userDefaults: UserDefaults
-    
-    init(userDefaults: UserDefaults = UserDefaults.standard) {
-        self.userDefaults = userDefaults
-    }
     
     var currentSession: Session? {
-        if let savedSession = userDefaults.object(forKey: kSession) as? Data {
+        if let savedSession = UserDefaults.standard.object(forKey: kSession) as? Data {
             return try? JSONDecoder().decode(Session.self, from: savedSession)
         } else {
             return nil
@@ -38,7 +33,7 @@ class Authentication: AuthenticationProtocol {
     
     func logout() {
         if (currentSession != nil) {
-            userDefaults.removeObject(forKey: kSession)
+            UserDefaults.standard.removeObject(forKey: kSession)
         }
     }
 }
