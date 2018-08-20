@@ -23,7 +23,6 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
     
     lazy var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [weak self] data, response, error in
         guard let strongSelf = self else { return }
@@ -40,7 +39,7 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         socialLoginContainer.addSubview(loginButton)
         loginButton.frame = CGRect(x: leftMargin / 2, y: 0, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
         
@@ -64,6 +63,9 @@ class SignInViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // Hide the navigation bar
+        self.navigationController?.isNavigationBarHidden = true
+        
         switch (authentication.getCredentials()) {
             case .session: performSegue(withIdentifier: homeViewSegue, sender: nil)
             case .facebook: sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: signInCallback)
@@ -82,10 +84,6 @@ class SignInViewController: UIViewController {
     // Actions
     @IBAction func signIn(_ sender: Any) {
         sessionLogicController.signIn(username: username, password: password, errorCallback: renderErrorMessage, completion: signInCallback)
-    }
-    
-    @IBAction func signUp(_ sender: Any) {
-        print("Pressed sign up")
     }
     
     private func animate() {

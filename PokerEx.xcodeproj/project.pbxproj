@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3182C04212AE7F30095DBAB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3182C03212AE7F30095DBAB /* SignUpViewController.swift */; };
 		A36001192128982900B9E381 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36001182128982900B9E381 /* SignInViewControllerTests.swift */; };
 		A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011B212898A900B9E381 /* FakeSessionLogicController.swift */; };
 		A360011E21289DD300B9E381 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011D21289DD300B9E381 /* MockError.swift */; };
@@ -55,6 +56,7 @@
 		38D1D57A59CF2E09AB36C953 /* Pods_PokerExUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerExUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6E75AA16855B5F597FAF5F /* Pods_PokerEx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerEx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B8E3FCAE81A96FCCCC40A1 /* Pods-PokerEx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerEx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerEx/Pods-PokerEx.debug.xcconfig"; sourceTree = "<group>"; };
+		A3182C03212AE7F30095DBAB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A36001182128982900B9E381 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		A360011B212898A900B9E381 /* FakeSessionLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionLogicController.swift; sourceTree = "<group>"; };
 		A360011D21289DD300B9E381 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A3182C02212AE7D90095DBAB /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				A3182C03212AE7F30095DBAB /* SignUpViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
 		A36001172128981100B9E381 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +187,7 @@
 		A3DCAA7620B338A800B8D2DA /* PokerEx */ = {
 			isa = PBXGroup;
 			children = (
+				A3182C02212AE7D90095DBAB /* Registration */,
 				A3BB323B211FD37100B14A2D /* Players */,
 				A3FEB461211FA1980005C518 /* Sessions */,
 				A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */,
@@ -457,6 +468,7 @@
 				A36001242129CB2500B9E381 /* SignInNetworking.swift in Sources */,
 				A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */,
 				A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */,
+				A3182C04212AE7F30095DBAB /* SignUpViewController.swift in Sources */,
 				A3FEB460211F9D120005C518 /* NetworkUtils.swift in Sources */,
 				A3FEB463211FA1F60005C518 /* SessionLogicController.swift in Sources */,
 				A3E5FE8820B6E68E001FB457 /* HomeViewController.swift in Sources */,
