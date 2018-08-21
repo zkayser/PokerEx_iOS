@@ -9,9 +9,8 @@ fileprivate let topMargin: CGFloat = 8
 fileprivate let verticalSpacing: CGFloat = 25
 fileprivate let buttonHeight: CGFloat = 50
 fileprivate let borderWidth: CGFloat = 2
-fileprivate let homeViewSegue = "HomeViewSegue"
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, SessionDelegateProtocol {
 
     private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
     var username: String?
@@ -24,7 +23,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     
-    lazy var signInCallback: (Data?, URLResponse?, Error?) -> Void = { [weak self] data, response, error in
+    lazy var sessionCallback: DataTaskCallback = { [weak self] data, response, error in
         guard let strongSelf = self else { return }
         guard let data = data, let response = response, error == nil else {
             strongSelf.renderBasicErrorMessage()
@@ -33,7 +32,7 @@ class SignInViewController: UIViewController {
 
         UserDefaults.standard.set(data, forKey: kSession)
         DispatchQueue.main.async {
-            strongSelf.performSegue(withIdentifier: homeViewSegue, sender: nil)
+            strongSelf.performSegue(withIdentifier: HOME_VIEW_SEGUE, sender: nil)
         }
     }
     
@@ -67,14 +66,14 @@ class SignInViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         switch (authentication.getCredentials()) {
-            case .session: performSegue(withIdentifier: homeViewSegue, sender: nil)
-            case .facebook: sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: signInCallback)
+            case .session: performSegue(withIdentifier: HOME_VIEW_SEGUE, sender: nil)
+            case .facebook: sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: sessionCallback)
             case .none: return
         }
     }
     
     override func performSegue(withIdentifier identifier: String, sender: Any?) {
-        if identifier == homeViewSegue {
+        if identifier == HOME_VIEW_SEGUE {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let homeVc = storyboard.instantiateViewController(withIdentifier: kHomeViewController)
             self.present(homeVc, animated: false)
@@ -83,7 +82,7 @@ class SignInViewController: UIViewController {
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        sessionLogicController.signIn(username: username, password: password, errorCallback: renderErrorMessage, completion: signInCallback)
+        sessionLogicController.signIn(username: username, password: password, errorCallback: renderErrorMessage, completion: sessionCallback)
     }
     
     private func animate() {

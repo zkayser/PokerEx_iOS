@@ -32,7 +32,7 @@ class SignInViewControllerTests: XCTestCase {
     var signInFailed: Bool = false
     var assignedDataToUserDefaults: Bool = false
     var dataAssignedToUserDefaults: Data?
-    lazy var mockSignInCallback: DataTaskCallback = { data, response, error in
+    lazy var mockSessionCallback: DataTaskCallback = { data, response, error in
         guard let data = data, let response = response, error == nil else {
             self.signInFailed = true
             return
@@ -45,7 +45,7 @@ class SignInViewControllerTests: XCTestCase {
     override func setUp() {
         signInViewController.authentication = auth
         signInViewController.sessionLogicController = fakeSessionLogicController
-        signInViewController.signInCallback = mockSignInCallback
+        signInViewController.sessionCallback = mockSessionCallback
     }
     
     override func tearDown() {

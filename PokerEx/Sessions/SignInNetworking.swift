@@ -33,4 +33,13 @@ class SignInNetworking {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         return request
     }
+    
+    static func signUpRequest(data: Data, url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = data
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        return request
+    }
 }

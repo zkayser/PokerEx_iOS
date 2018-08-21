@@ -16,6 +16,7 @@
 		A36001242129CB2500B9E381 /* SignInNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36001232129CB2500B9E381 /* SignInNetworking.swift */; };
 		A3BB323D211FD39300B14A2D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323C211FD39300B14A2D /* Session.swift */; };
 		A3BB323F2120A88600B14A2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323E2120A88600B14A2D /* Constants.swift */; };
+		A3BE7FC0212B861D00D7EDB2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BE7FBF212B861D00D7EDB2 /* Registration.swift */; };
 		A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */; };
 		A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */; };
 		A3DCAA7D20B338A800B8D2DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3DCAA7B20B338A800B8D2DA /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		A36001232129CB2500B9E381 /* SignInNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInNetworking.swift; sourceTree = "<group>"; };
 		A3BB323C211FD39300B14A2D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A3BB323E2120A88600B14A2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A3BE7FBF212B861D00D7EDB2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		A3DCAA7420B338A800B8D2DA /* PokerEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BB323C211FD39300B14A2D /* Session.swift */,
+				A3BE7FBF212B861D00D7EDB2 /* Registration.swift */,
 			);
 			path = Players;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3BB323D211FD39300B14A2D /* Session.swift in Sources */,
+				A3BE7FC0212B861D00D7EDB2 /* Registration.swift in Sources */,
 				A36001242129CB2500B9E381 /* SignInNetworking.swift in Sources */,
 				A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */,
 				A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */,
