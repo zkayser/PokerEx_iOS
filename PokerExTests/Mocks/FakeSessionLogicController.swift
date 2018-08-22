@@ -2,6 +2,7 @@ import Foundation
 @testable import PokerEx
 
 class FakeSessionLogicController: SessionLogicControllerProtocol {
+
     var wasErrorCallbackInvoked: Bool = false
     var wasCompletionInvoked: Bool = false
     var didFBGraphResponseSucceed: Bool = true
@@ -26,6 +27,16 @@ class FakeSessionLogicController: SessionLogicControllerProtocol {
         } else {
             wasErrorCallbackInvoked = true
         }
+    }
+    
+    func signUp(registration: Registration, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
+        guard let _ = registration.name, let _ = registration.password else {
+            wasErrorCallbackInvoked = true
+            return
+        }
+        
+        wasCompletionInvoked = true
+        completion(sessionData, response, error)
     }
     
     func mockNetworkResponse(data: Data?, response: URLResponse?, error: Error?) {

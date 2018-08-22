@@ -17,6 +17,7 @@
 		A3BB323D211FD39300B14A2D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323C211FD39300B14A2D /* Session.swift */; };
 		A3BB323F2120A88600B14A2D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB323E2120A88600B14A2D /* Constants.swift */; };
 		A3BE7FC0212B861D00D7EDB2 /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BE7FBF212B861D00D7EDB2 /* Registration.swift */; };
+		A3CE08E6212CF1210088DCA5 /* SignUpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CE08E5212CF1210088DCA5 /* SignUpViewControllerTests.swift */; };
 		A3DCAA7820B338A800B8D2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */; };
 		A3DCAA7A20B338A800B8D2DA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */; };
 		A3DCAA7D20B338A800B8D2DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3DCAA7B20B338A800B8D2DA /* Main.storyboard */; };
@@ -67,6 +68,7 @@
 		A3BB323C211FD39300B14A2D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A3BB323E2120A88600B14A2D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A3BE7FBF212B861D00D7EDB2 /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
+		A3CE08E5212CF1210088DCA5 /* SignUpViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewControllerTests.swift; sourceTree = "<group>"; };
 		A3DCAA7420B338A800B8D2DA /* PokerEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3DCAA7720B338A800B8D2DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3DCAA7920B338A800B8D2DA /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,14 @@
 			path = Players;
 			sourceTree = "<group>";
 		};
+		A3CE08E4212CF1050088DCA5 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				A3CE08E5212CF1210088DCA5 /* SignUpViewControllerTests.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
 		A3DCAA6B20B338A800B8D2DA = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +218,7 @@
 		A3DCAA8B20B338A900B8D2DA /* PokerExTests */ = {
 			isa = PBXGroup;
 			children = (
+				A3CE08E4212CF1050088DCA5 /* Registration */,
 				A360011A2128989500B9E381 /* Mocks */,
 				A36001172128981100B9E381 /* Sessions */,
 				A3DCAA8C20B338A900B8D2DA /* PokerExTests.swift */,
@@ -486,6 +497,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */,
+				A3CE08E6212CF1210088DCA5 /* SignUpViewControllerTests.swift in Sources */,
 				A36001202128A1AD00B9E381 /* FakeAuth.swift in Sources */,
 				A36001192128982900B9E381 /* SignInViewControllerTests.swift in Sources */,
 				A36001222129C95100B9E381 /* SignInNetworkingTests.swift in Sources */,

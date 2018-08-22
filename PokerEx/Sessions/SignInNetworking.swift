@@ -25,21 +25,12 @@ class SignInNetworking {
         return json
     }
     
-    static func signInRequest(data: Data, url: URL) -> URLRequest {
+    static func sessionRequest(data: Data, url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTP_POST
         request.httpBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        return request
-    }
-    
-    static func signUpRequest(data: Data, url: URL) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = data
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(APPLICATION_JSON, forHTTPHeaderField: CONTENT_TYPE)
+        request.addValue(APPLICATION_JSON, forHTTPHeaderField: ACCEPT)
         return request
     }
 }

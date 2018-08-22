@@ -162,46 +162,46 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="hlA-To-OgT">
-                                <rect key="frame" x="8" y="147" width="359" height="348"/>
+                                <rect key="frame" x="8" y="147" width="359" height="402"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DPe-sH-3WU">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="43.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-0Y-wfM">
-                                        <rect key="frame" x="0.0" y="52" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="59.5" width="359" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nzS-y1-ILz">
-                                        <rect key="frame" x="0.0" y="104" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="119.5" width="359" height="43.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LDV-Im-1BB">
-                                        <rect key="frame" x="0.0" y="156" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="179" width="359" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hsq-hC-Y3Q">
-                                        <rect key="frame" x="0.0" y="208" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="239" width="359" height="43.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Personal Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MGn-cl-QXV">
-                                        <rect key="frame" x="0.0" y="260" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="298.5" width="359" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoZ-RT-Oob">
-                                        <rect key="frame" x="0.0" y="312" width="359" height="36"/>
+                                        <rect key="frame" x="0.0" y="358.5" width="359" height="43.5"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="IWR-H4-Tq1"/>
@@ -235,6 +235,7 @@
                         <outlet property="lastNameField" destination="kXu-0Y-wfM" id="KCN-DG-4A6"/>
                         <outlet property="messageField" destination="MGn-cl-QXV" id="cjx-cs-Her"/>
                         <outlet property="passwordField" destination="hsq-hC-Y3Q" id="iUW-g1-p1z"/>
+                        <outlet property="titleLabel" destination="tPe-Qp-JXe" id="Wvl-bH-ES8"/>
                         <outlet property="usernameField" destination="LDV-Im-1BB" id="0Fh-Yu-guv"/>
                     </connections>
                 </viewController>
@@ -262,9 +263,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Teal">
-            <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Teal">
             <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
