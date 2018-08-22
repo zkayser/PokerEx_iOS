@@ -27,7 +27,7 @@ class SignInNetworkingTests: XCTestCase {
     }
     
     func test_itBuildsNetworkRequests() {
-        let request = SignInNetworking.signInRequest(data: data, url: url)
+        let request = SignInNetworking.sessionRequest(data: data, url: url)
         XCTAssertEqual(request.httpBody, data)
         XCTAssertEqual(request.httpMethod, "POST")
     }

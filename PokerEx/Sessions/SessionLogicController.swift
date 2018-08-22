@@ -3,8 +3,13 @@ import FacebookCore
 
 typealias DataTaskCallback = (Data?, URLResponse?, Error?) -> Void
 
+protocol SessionDelegateProtocol {
+    var sessionCallback: DataTaskCallback { mutating get }
+}
+
 protocol SessionLogicControllerProtocol {
     func signIn(username: String?, password: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
+    func signUp(registration: Registration, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
     func facebookSignIn(errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
 }
 
@@ -25,7 +30,22 @@ class SessionLogicController: SessionLogicControllerProtocol {
         
         guard let data = try? JSONSerialization.data(withJSONObject: json, options: []) else { return }
         
-        URLSession.shared.dataTask(with: SignInNetworking.signInRequest(data: data, url: url), completionHandler: completion).resume()
+        URLSession.shared.dataTask(with: SignInNetworking.sessionRequest(data: data, url: url), completionHandler: completion).resume()
+    }
+    
+    func signUp(registration: Registration, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
+        guard let _ = registration.name, let _ = registration.password else {
+            errorCallback?()
+            return
+        }
+        
+        guard let url = URL(string: "\(baseUrl)api/registrations") else { return }
+        guard let jsonData = try? JSONEncoder().encode(registration) else {
+            errorCallback?()
+            return
+        }
+        
+        URLSession.shared.dataTask(with: SignInNetworking.sessionRequest(data: jsonData, url: url), completionHandler: completion).resume()
     }
     
     func facebookSignIn(errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
@@ -53,6 +73,6 @@ class SessionLogicController: SessionLogicControllerProtocol {
         
         guard let data = try? JSONSerialization.data(withJSONObject: json, options: []) else { return }
         
-        URLSession.shared.dataTask(with: SignInNetworking.signInRequest(data: data, url: url), completionHandler: completion).resume()
+        URLSession.shared.dataTask(with: SignInNetworking.sessionRequest(data: data, url: url), completionHandler: completion).resume()
     }
 }

@@ -17,15 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController")
-        window?.rootViewController = rootViewController
-        
-        if (AccessToken.current == nil) {
-            let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignInViewController") as! SignInViewController
-            window?.rootViewController = signInViewController
-        }
-        
         return true
     }
 
