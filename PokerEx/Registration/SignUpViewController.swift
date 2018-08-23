@@ -3,7 +3,7 @@ import UIKit
 // UI Value Constants
 fileprivate let LEFT_MARGIN: CGFloat = 16
 fileprivate let VERTICAL_SPACING: CGFloat = 8
-fileprivate let LABEL_HEIGHT: CGFloat = 20
+fileprivate let LABEL_HEIGHT: CGFloat = 50
 
 class SignUpViewController: UIViewController, SessionDelegateProtocol {
     
@@ -60,6 +60,8 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
         sessionLogicController.signUp(registration: registration, errorCallback: renderError, completion: sessionCallback)
     }
     
+    // TODO: This is a mess.
+    // Move complex UI concern handling to separate class/module
     private func renderError() {
         var errorMsg = ""
         if (registration.name == nil && registration.password == nil) {
@@ -77,13 +79,26 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
         let label = UILabel()
         
         label.text = errorMsg
-        label.textColor = .red
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textColor = .white
         label.textAlignment = .center
-        label.font.withSize(14)
-        label.frame = CGRect(x: LEFT_MARGIN, y: titleLabel.frame.maxY + VERTICAL_SPACING, width: view.bounds.size.width - LEFT_MARGIN, height: LABEL_HEIGHT)
-        view.addSubview(label)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        let layer = CALayer()
+        layer.contents = label
+        layer.zPosition = 50
+        layer.backgroundColor = UIColor.red.cgColor
+        layer.frame = CGRect(x: LEFT_MARGIN, y: titleLabel.frame.minY, width: UIScreen.main.bounds.width - (2 * LEFT_MARGIN), height: LABEL_HEIGHT)
+        label.frame = CGRect(x: 0, y: 0, width: layer.frame.width, height: layer.frame.height)
+        layer.addSublayer(label.layer)
+        view.layer.addSublayer(layer)
+        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(removeLayer(_:)), userInfo: layer, repeats: false)
     }
     
+    @objc func removeLayer(_ timer: Timer) {
+        let layer = timer.userInfo as! CALayer
+        layer.removeFromSuperlayer()
+    }
 }
 
 extension SignUpViewController: UITextFieldDelegate {
