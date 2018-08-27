@@ -97,7 +97,15 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
     
     @objc func removeLayer(_ timer: Timer) {
         let layer = timer.userInfo as! CALayer
-        layer.removeFromSuperlayer()
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(1.5)
+        CATransaction.setCompletionBlock {
+            layer.removeFromSuperlayer()
+        }
+        
+        layer.opacity = 0
+        layer.transform = CATransform3DMakeScale(0.1, 1, 1)
+        CATransaction.commit()
     }
 }
 
