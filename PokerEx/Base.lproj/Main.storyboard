@@ -216,6 +216,20 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YP-zU-ONI">
+                                <rect key="frame" x="8" y="596" width="359" height="50"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NaJ-Cs-4Pp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="6Tz-mc-X0i" eventType="touchUpInside" id="iQg-3Q-Utk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="Teal"/>
                         <constraints>
@@ -223,6 +237,10 @@
                             <constraint firstItem="51d-7k-cdh" firstAttribute="trailing" secondItem="tPe-Qp-JXe" secondAttribute="trailing" constant="8" id="2i1-Pg-H0g"/>
                             <constraint firstItem="hlA-To-OgT" firstAttribute="leading" secondItem="51d-7k-cdh" secondAttribute="leading" constant="8" id="7K2-eq-vhT"/>
                             <constraint firstItem="tPe-Qp-JXe" firstAttribute="leading" secondItem="51d-7k-cdh" secondAttribute="leading" constant="16" id="IxA-Jl-b2O"/>
+                            <constraint firstItem="7YP-zU-ONI" firstAttribute="top" secondItem="YoZ-RT-Oob" secondAttribute="bottom" constant="21" id="QTE-Ld-8RE"/>
+                            <constraint firstItem="51d-7k-cdh" firstAttribute="trailing" secondItem="7YP-zU-ONI" secondAttribute="trailing" constant="8" id="azQ-KT-nZf"/>
+                            <constraint firstItem="7YP-zU-ONI" firstAttribute="leading" secondItem="51d-7k-cdh" secondAttribute="leading" constant="8" id="cXv-Hq-hX4"/>
+                            <constraint firstItem="51d-7k-cdh" firstAttribute="bottom" secondItem="7YP-zU-ONI" secondAttribute="bottom" constant="21" id="d7L-fi-Tdf"/>
                             <constraint firstItem="51d-7k-cdh" firstAttribute="trailing" secondItem="hlA-To-OgT" secondAttribute="trailing" constant="8" id="kiQ-re-aSs"/>
                             <constraint firstItem="hlA-To-OgT" firstAttribute="top" secondItem="tPe-Qp-JXe" secondAttribute="bottom" constant="25" id="lVO-Ka-f7r"/>
                             <constraint firstItem="tPe-Qp-JXe" firstAttribute="top" secondItem="51d-7k-cdh" secondAttribute="top" constant="7.5" id="qoF-gf-ggq"/>

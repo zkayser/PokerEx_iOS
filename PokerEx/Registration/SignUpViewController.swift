@@ -16,6 +16,9 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var messageField: UITextField!
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     lazy var sessionCallback: DataTaskCallback = { [weak self] data, response, error in
         guard let strongSelf = self else { return }
@@ -47,7 +50,7 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func performSegue(withIdentifier identifier: String, sender: Any?) {
@@ -76,14 +79,18 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
             errorMsg = "Something went wrong. Please try again."
         }
         
+        addErrorLabel(errorMsg: errorMsg)
+    }
+    
+    private func addErrorLabel(errorMsg: String) {
         let label = UILabel()
-        
         label.text = errorMsg
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14)
+        
         let layer = CALayer()
         layer.contents = label
         layer.zPosition = 50
@@ -98,13 +105,12 @@ class SignUpViewController: UIViewController, SessionDelegateProtocol {
     @objc func removeLayer(_ timer: Timer) {
         let layer = timer.userInfo as! CALayer
         CATransaction.begin()
-        CATransaction.setAnimationDuration(1.5)
+        CATransaction.setAnimationDuration(1)
         CATransaction.setCompletionBlock {
             layer.removeFromSuperlayer()
         }
-        
-        layer.opacity = 0
-        layer.transform = CATransform3DMakeScale(0.1, 1, 1)
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
+        layer.transform = CATransform3DMakeScale(0, 1, 1)
         CATransaction.commit()
     }
 }
