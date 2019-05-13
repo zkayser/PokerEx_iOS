@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A3182C04212AE7F30095DBAB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3182C03212AE7F30095DBAB /* SignUpViewController.swift */; };
+		A319D36D2289C6BA005B4D73 /* spade_2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A319D36C2289C6BA005B4D73 /* spade_2.pdf */; };
 		A36001192128982900B9E381 /* SignInViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36001182128982900B9E381 /* SignInViewControllerTests.swift */; };
 		A360011C212898A900B9E381 /* FakeSessionLogicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011B212898A900B9E381 /* FakeSessionLogicController.swift */; };
 		A360011E21289DD300B9E381 /* MockError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A360011D21289DD300B9E381 /* MockError.swift */; };
@@ -59,6 +60,7 @@
 		6C6E75AA16855B5F597FAF5F /* Pods_PokerEx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerEx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80B8E3FCAE81A96FCCCC40A1 /* Pods-PokerEx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerEx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PokerEx/Pods-PokerEx.debug.xcconfig"; sourceTree = "<group>"; };
 		A3182C03212AE7F30095DBAB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A319D36C2289C6BA005B4D73 /* spade_2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = spade_2.pdf; path = ../../../study/svgs/pdf/spade_2.pdf; sourceTree = "<group>"; };
 		A36001182128982900B9E381 /* SignInViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewControllerTests.swift; sourceTree = "<group>"; };
 		A360011B212898A900B9E381 /* FakeSessionLogicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSessionLogicController.swift; sourceTree = "<group>"; };
 		A360011D21289DD300B9E381 /* MockError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockError.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				A3E5FE8720B6E68E001FB457 /* HomeViewController.swift */,
 				A3FEB45F211F9D120005C518 /* NetworkUtils.swift */,
 				A3BB323E2120A88600B14A2D /* Constants.swift */,
+				A319D36C2289C6BA005B4D73 /* spade_2.pdf */,
 			);
 			path = PokerEx;
 			sourceTree = "<group>";
@@ -368,8 +371,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3DCAA8220B338A900B8D2DA /* LaunchScreen.storyboard in Resources */,
+				A319D36D2289C6BA005B4D73 /* spade_2.pdf in Resources */,
 				A3DCAA7F20B338A900B8D2DA /* Assets.xcassets in Resources */,
+				A3DCAA8220B338A900B8D2DA /* LaunchScreen.storyboard in Resources */,
 				A3DCAA7D20B338A800B8D2DA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

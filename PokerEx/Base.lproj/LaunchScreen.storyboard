@@ -18,7 +18,18 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-5R-SCa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" name="Teal"/>
+                        <constraints>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1Gq-Ta-HOx"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N9X-nx-9CO"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="NFd-Kl-D4S"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="zyf-PW-SUp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -28,6 +39,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SplashScreen" width="300" height="300"/>
         <namedColor name="Teal">
             <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
