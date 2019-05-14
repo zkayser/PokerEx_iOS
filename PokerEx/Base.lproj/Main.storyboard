@@ -88,22 +88,12 @@
                                     <constraint firstItem="FNJ-Ax-O2x" firstAttribute="top" secondItem="tkl-Vz-ORt" secondAttribute="bottom" constant="25" id="wxn-DC-5hB"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mb-ft-Nme">
-                                <rect key="frame" x="16" y="504" width="343" height="60"/>
-                                <color key="backgroundColor" name="Teal"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="61S-hl-Wp7"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" name="Teal"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="caC-vv-CCv" secondAttribute="trailing" constant="16" id="5by-Ne-fTO"/>
                             <constraint firstItem="caC-vv-CCv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NQb-7G-hb7"/>
                             <constraint firstItem="caC-vv-CCv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Nhh-qg-dgd"/>
-                            <constraint firstItem="1Mb-ft-Nme" firstAttribute="top" secondItem="caC-vv-CCv" secondAttribute="bottom" constant="8" id="UoD-bI-7VB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Mb-ft-Nme" secondAttribute="trailing" constant="16" id="W7m-1Z-XzG"/>
-                            <constraint firstItem="1Mb-ft-Nme" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jQ2-JH-HYt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -112,13 +102,12 @@
                         <outlet property="containerView" destination="caC-vv-CCv" id="0sY-fD-js6"/>
                         <outlet property="passwordField" destination="FNJ-Ax-O2x" id="Wcv-zD-VvM"/>
                         <outlet property="signInButton" destination="gnr-Eo-hao" id="xCb-Yl-irT"/>
-                        <outlet property="socialLoginContainer" destination="1Mb-ft-Nme" id="EGA-qw-kRU"/>
                         <outlet property="usernameField" destination="tkl-Vz-ORt" id="rdo-SI-JqJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="134"/>
+            <point key="canvasLocation" x="885.60000000000002" y="133.5832083958021"/>
         </scene>
         <!--HomeViewController-->
         <scene sceneID="ObJ-Wq-6ye">
