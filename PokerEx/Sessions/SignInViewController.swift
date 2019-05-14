@@ -13,12 +13,11 @@ fileprivate let borderWidth: CGFloat = 2
 
 class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignInUIDelegate {
 
-    private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
-    private let googleSignIn = UIButton(frame: CGRect(x: leftMargin / 2, y: 25, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight))
     var username: String?
     var password: String?
     var sessionLogicController: SessionLogicControllerProtocol!
     var authentication: AuthenticationProtocol!
+    var viewModel: SignInViewModel?
     @IBOutlet weak var containerView: UIStackView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -40,32 +39,14 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Instantiate view model
+        viewModel = SignInViewModel(parent: view, containerView: containerView, signInButton: signInButton)
+        
         // set self as the delegate for Google Sign In UI
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        // Uncomment to automatically sign in the user.
-        //GIDSignIn.sharedInstance().signInSilently()
-        googleSignIn.titleLabel?.textAlignment = .center
-        googleSignIn.layer.backgroundColor = UIColor.blue.cgColor
-        googleSignIn.setTitle("Sign In With Google", for: .normal)
-        googleSignIn.setTitleColor(.white, for: .normal)
-        googleSignIn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
-        googleSignIn.setImage(#imageLiteral(resourceName: "GoogleLogo"), for: .normal)
-        googleSignIn.layoutSubviews()
-        googleSignIn.contentHorizontalAlignment = .left
-        googleSignIn.contentEdgeInsets = UIEdgeInsets(top: googleSignIn.contentEdgeInsets.top, left: leftMargin, bottom: googleSignIn.contentEdgeInsets.bottom, right: googleSignIn.contentEdgeInsets.right)
-        let availableSpace = UIEdgeInsetsInsetRect(googleSignIn.bounds, googleSignIn.contentEdgeInsets)
-        let availableWidth = availableSpace.width - googleSignIn.imageEdgeInsets.right - (googleSignIn.imageView?.frame.width ?? 0) - (googleSignIn.titleLabel?.frame.width ?? 0)
-        googleSignIn.titleEdgeInsets = UIEdgeInsets(top: 0, left: (availableWidth / 2), bottom: 0, right: 0)
-        googleSignIn.layer.zPosition = 1
-        googleSignIn.titleLabel?.layer.zPosition = 2
-        googleSignIn.isUserInteractionEnabled = true
-        googleSignIn.addTarget(self, action: #selector(signInWithGoogle), for: .touchUpInside)
-        googleSignIn.frame = CGRect(x: containerView.frame.minX + (leftMargin / 2), y: containerView.frame.maxY + verticalSpacing + buttonHeight, width: signInButton.frame.width, height: buttonHeight)
-        print("Adding google sign in view")
-        view.addSubview(googleSignIn)
-        
-//        loginButton.frame = CGRect(x: leftMargin / 2, y: 0, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
+        // Add google sign in button
+        viewModel?.renderGoogleSignIn(with: self)
         
         // add tap gesture recognizer to dismiss keyboard when tap anywhere on screen
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

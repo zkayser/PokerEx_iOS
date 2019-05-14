@@ -77,7 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //            let userId = user.userID                  // For client-side use only!
 //            let idToken = user.authentication.idToken // Safe to send to the server
 //            let email = user.profile.email
-            print("Got some user information for the user that signed in: \(user)")
+            print("Got some user information for the user that signed in: \(user.userID)")
+            print("Id token: \(user.authentication.idToken)")
+            print("Email: \(user.profile.email)")
         }
     }
     
