@@ -1,3 +1,4 @@
 language: swift
+install: pod install --repo-update
 script:
   - xcodebuild clean test -workspace PokerEx.xcworkspace -scheme PokerEx -destination "platform=iOS Simulator,name=iPhone X,OS=11.3"
