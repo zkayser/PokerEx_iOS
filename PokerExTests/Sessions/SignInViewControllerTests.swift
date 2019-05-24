@@ -1,5 +1,6 @@
 import XCTest
 @testable import PokerEx
+import GoogleSignIn
 
 class SignInViewControllerTests: XCTestCase {
     

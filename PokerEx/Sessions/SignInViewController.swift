@@ -42,7 +42,8 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
         // Instantiate view model
         viewModel = SignInViewModel(parent: view, containerView: containerView, signInButton: signInButton)
         
-        // set self as the delegate for Google Sign In UI
+        // set self as the delegate for Google Sign In UI and GoogleSignIn
+        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         
         // Add google sign in button
@@ -156,6 +157,46 @@ extension SignInViewController: UITextFieldDelegate {
         } else {
             password = textField.text
         }
+    }
+}
+
+extension SignInViewController: GIDSignInDelegate {
+    // GOOGLE SIGN IN DELEGATE FUNCTIONS
+    private func application(application: UIApplication,
+                             openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        var _: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject,
+                                      UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation!]
+        return GIDSignIn.sharedInstance().handle(url as URL?,
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("Running application:openUrl:options function with url: \(url)")
+        return GIDSignIn.sharedInstance().handle(url as URL?,
+                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+        if let _ = error {
+            renderBasicErrorMessage()
+        } else {
+            print("Signed in...")
+            sessionLogicController.googleSignIn(email: user.profile.email, tokenId: user.authentication.idToken, errorCallback: renderBasicErrorMessage, completion: sessionCallback)
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
+              withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // I.E., in our case, we are going to have to remove the user's session
+        // from UserDefaults dictionary, or wherever we end up storing session
+        // information on the client later.
+        print("User disconnected: \(user)")
     }
 }
 

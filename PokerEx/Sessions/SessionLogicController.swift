@@ -11,6 +11,7 @@ protocol SessionLogicControllerProtocol {
     func signIn(username: String?, password: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
     func signUp(registration: Registration, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
     func facebookSignIn(errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
+    func googleSignIn(email: String?, tokenId: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback)
 }
 
 class SessionLogicController: SessionLogicControllerProtocol {
@@ -60,6 +61,19 @@ class SessionLogicController: SessionLogicControllerProtocol {
                 default: errorCallback?()
             }
         }
+    }
+    
+    func googleSignIn(email: String?, tokenId: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
+        guard let email = email, let tokenId = tokenId else {
+            errorCallback?()
+            return
+        }
+        
+        guard let url = URL(string: "\(baseUrl)api/auth") else { return }
+        let json = SignInNetworking.buildGoogleSignInPayload(email: email, tokenId: tokenId)
+        guard let data = try? JSONSerialization.data(withJSONObject: json, options: []) else { return }
+        
+        URLSession.shared.dataTask(with: SignInNetworking.sessionRequest(data: data, url: url), completionHandler: completion).resume()
     }
     
     private func fireFacebookSignInRequest(username: String?, facebookId: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
