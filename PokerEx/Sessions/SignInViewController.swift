@@ -132,11 +132,29 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
     }
     
     private func buildBottomBorderLayer() -> CALayer {
-        let borderLayer = CALayer()
-        borderLayer.borderColor = UIColor.lightGray.cgColor
-        borderLayer.frame = CGRect(x: leftMargin, y: usernameField.frame.size.height + 5, width: UIScreen.main.bounds.width - (4 * leftMargin), height: borderWidth)
-        borderLayer.borderWidth = borderWidth
-        return borderLayer
+        let line = CAShapeLayer()
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: signInButton.frame.minX, y: usernameField.frame.size.height))
+        path.addLine(to: CGPoint(x: signInButton.frame.maxX, y: usernameField.frame.size.height))
+        line.path = path.cgPath
+        line.opacity = 1.0
+        line.strokeColor = UIColor.lightGray.cgColor
+        line.lineWidth = 2.0
+        line.strokeStart = 0.5
+        line.strokeEnd = 0.5
+        
+        let animationGroup = CAAnimationGroup()
+        let strokeStartAnim = CABasicAnimation(keyPath: "strokeStart")
+        strokeStartAnim.toValue = 0.0
+        let strokeEndAnim = CABasicAnimation(keyPath: "strokeEnd")
+        strokeEndAnim.toValue = 1.0
+        animationGroup.animations = [strokeStartAnim, strokeEndAnim]
+        animationGroup.fillMode = kCAFillModeBoth
+        animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationGroup.isRemovedOnCompletion = false
+        animationGroup.duration = 0.75
+        line.add(animationGroup, forKey: "strokeAnimation")
+        return line
     }
     
     @objc private func dismissKeyboard() {
