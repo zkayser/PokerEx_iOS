@@ -22,11 +22,13 @@ class SignInViewModel {
     let parentView: UIView
     let containerView: UIView
     let signInButton: UIButton
+    let textFields: [String: UITextField]
     
-    init(parent view: UIView, containerView: UIView, signInButton: UIButton) {
+    init(parent view: UIView, containerView: UIView, signInButton: UIButton, textFields: [String: UITextField]) {
         self.parentView = view
         self.containerView = containerView
         self.signInButton = signInButton
+        self.textFields = textFields
     }
     
     func renderGoogleSignIn(with delegate: SignInViewController) {
@@ -52,5 +54,65 @@ class SignInViewModel {
         // Set action on view controller
         googleSignIn.addTarget(delegate, action: #selector(delegate.signInWithGoogle), for: .touchUpInside)
         parentView.addSubview(googleSignIn)
+    }
+    
+    func buildBottomBorderLayer() -> CALayer {
+        let line = CAShapeLayer()
+        let path = UIBezierPath()
+        let height = textFields["username"]!.frame.size.height
+        path.move(to: CGPoint(x: signInButton.frame.minX, y: height))
+        path.addLine(to: CGPoint(x: signInButton.frame.maxX, y: height))
+        line.path = path.cgPath
+        line.opacity = 1.0
+        line.strokeColor = UIColor.lightGray.cgColor
+        line.lineWidth = 2.0
+        line.strokeStart = 0.5
+        line.strokeEnd = 0.5
+        
+        let animationGroup = CAAnimationGroup()
+        let strokeStartAnim = CABasicAnimation(keyPath: "strokeStart")
+        strokeStartAnim.toValue = 0.0
+        let strokeEndAnim = CABasicAnimation(keyPath: "strokeEnd")
+        strokeEndAnim.toValue = 1.0
+        animationGroup.animations = [strokeStartAnim, strokeEndAnim]
+        animationGroup.fillMode = kCAFillModeBoth
+        animationGroup.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animationGroup.isRemovedOnCompletion = false
+        animationGroup.duration = 0.75
+        line.add(animationGroup, forKey: "strokeAnimation")
+        return line
+    }
+    
+    func renderErrorMessage(username: String?, password: String?) -> () -> Void {
+        return {
+            if (username == nil) {
+                self.errorLabel(for: "username", on: self.textFields["username"]!)
+            }
+            
+            if (password == nil) {
+                self.errorLabel(for: "password", on: self.textFields["password"]!)
+            }
+        }
+    }
+    
+    private func errorLabel(for property: String, on textField: UITextField) {
+        let label = UILabel()
+        label.text = "\(property.capitalized) must not be blank"
+        label.textColor = .red
+        label.textAlignment = .center
+        label.font.withSize(14)
+        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
+        containerView.addSubview(label)
+    }
+    
+    func renderBasicErrorMessage(on view: UIView) -> () -> Void {
+        return {
+            let label = UILabel()
+            label.text = "We're sorry. Something went wrong with your login. Please try again shortly."
+            label.textColor = .red
+            label.font.withSize(14)
+            label.frame = CGRect(x: leftMargin, y: topMargin, width: view.frame.width, height: verticalSpacing)
+            view.addSubview(label)
+        }
     }
 }
