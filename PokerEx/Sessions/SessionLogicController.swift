@@ -28,9 +28,8 @@ class SessionLogicController: SessionLogicControllerProtocol {
         
         guard let url = URL(string: "\(baseUrl)api/sessions") else { return }
         let json = SignInNetworking.buildSignInPayload(username: username, password: password)
-        
         guard let data = try? JSONSerialization.data(withJSONObject: json, options: []) else { return }
-        
+        print("Trying to hit url: \(url)")
         URLSession.shared.dataTask(with: SignInNetworking.sessionRequest(data: data, url: url), completionHandler: completion).resume()
     }
     
