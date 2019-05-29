@@ -16,6 +16,7 @@ fileprivate let topMargin: CGFloat = 8
 fileprivate let verticalSpacing: CGFloat = 25
 fileprivate let buttonHeight: CGFloat = 50
 fileprivate let borderWidth: CGFloat = 2
+fileprivate let LOGIN_ERROR_MSG = "We're sorry. Something went wrong with your login. Please try again shortly."
 
 class SignInViewModel {
     
@@ -83,19 +84,20 @@ class SignInViewModel {
         return line
     }
     
-    func renderErrorMessage(username: String?, password: String?) -> () -> Void {
-        return {
-            if (username == nil) {
-                self.errorLabel(for: "username", on: self.textFields["username"]!)
-            }
-            
-            if (password == nil) {
-                self.errorLabel(for: "password", on: self.textFields["password"]!)
-            }
+    func renderErrorMessage() {
+        guard let _ = textFields["username"]?.text else {
+            errorLabel(for: "username", on: textFields["username"])
+            return
+        }
+        
+        guard let _ = textFields["password"]?.text else {
+            errorLabel(for: "password", on: textFields["password"])
+            return
         }
     }
     
-    private func errorLabel(for property: String, on textField: UITextField) {
+    private func errorLabel(for property: String, on textField: UITextField?) {
+        guard let textField = textField else { return }
         let label = UILabel()
         label.text = "\(property.capitalized) must not be blank"
         label.textColor = .red
@@ -105,14 +107,34 @@ class SignInViewModel {
         containerView.addSubview(label)
     }
     
-    func renderBasicErrorMessage(on view: UIView) -> () -> Void {
-        return {
-            let label = UILabel()
-            label.text = "We're sorry. Something went wrong with your login. Please try again shortly."
-            label.textColor = .red
-            label.font.withSize(14)
-            label.frame = CGRect(x: leftMargin, y: topMargin, width: view.frame.width, height: verticalSpacing)
-            view.addSubview(label)
-        }
+    func renderUnauthenticatedError() {
+        renderBasicErrorMessage(message: "Login failed. Please reenter your credentials and try again.")
+    }
+    
+    func renderBasicErrorMessage(message: String = LOGIN_ERROR_MSG) {
+            DispatchQueue.main.sync {
+                guard let topMostTextField = self.textFields["username"] else { return }
+                let label = UILabel()
+                label.layer.backgroundColor = UIColor.red.cgColor
+                label.text = message
+                label.textColor = .white
+                label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+                label.frame = CGRect(x: topMostTextField.frame.minX,
+                                     y: topMostTextField.frame.minY - (verticalSpacing * 2.5),
+                                     width: topMostTextField.frame.maxX - topMostTextField.frame.minX,
+                                     height: verticalSpacing * 2.5)
+                label.lineBreakMode = .byWordWrapping
+                label.numberOfLines = 0
+                label.textAlignment = .center
+                topMostTextField.superview?.addSubview(label)
+                
+                Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { (timer) in
+                    UIView.animate(withDuration: 0.5, animations: {
+                        label.transform = CGAffineTransform(translationX: -(UIScreen.main.bounds.maxX), y: 0)
+                    }, completion: { (_) in
+                        label.removeFromSuperview()
+                    })
+                })
+            }
     }
 }

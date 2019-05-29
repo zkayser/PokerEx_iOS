@@ -26,14 +26,14 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
     lazy var sessionCallback: DataTaskCallback = { [weak self] data, response, error in
         guard let strongSelf = self else { return }
         guard let data = data, let response = response, error == nil else {
-            strongSelf.viewModel!.renderBasicErrorMessage(on: strongSelf.view)()
+            strongSelf.viewModel!.renderBasicErrorMessage()
             return
         }
         
         if let response = response as? HTTPURLResponse {
             let statusCode = response.statusCode
             if (statusCode != 200) {
-                strongSelf.viewModel!.renderBasicErrorMessage(on: strongSelf.view)()
+                strongSelf.viewModel!.renderUnauthenticatedError()
                 return
             }
         }
@@ -87,7 +87,9 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
         
         switch (authentication.getCredentials()) {
             case .session: performSegue(withIdentifier: HOME_VIEW_SEGUE, sender: nil)
-        case .facebook: sessionLogicController.facebookSignIn(errorCallback: viewModel!.renderBasicErrorMessage(on: view), completion: sessionCallback)
+        case .facebook: sessionLogicController.facebookSignIn(
+            errorCallback: { () in self.viewModel!.renderBasicErrorMessage() },
+            completion: sessionCallback)
             case .none: return
         }
     }
@@ -102,9 +104,10 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        sessionLogicController.signIn(username: username,
-                                      password: password,
-                                      errorCallback: viewModel!.renderErrorMessage(username: username, password: password),
+        print("You hit the signin button....")
+        sessionLogicController.signIn(username: usernameField.text,
+                                      password: passwordField.text,
+                                      errorCallback: viewModel!.renderErrorMessage,
                                       completion: sessionCallback)
     }
     
@@ -155,9 +158,13 @@ extension SignInViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
         if let _ = error {
-            viewModel!.renderBasicErrorMessage(on: view)()
+            viewModel!.renderBasicErrorMessage()
         } else {
-            sessionLogicController.googleSignIn(email: user.profile.email, tokenId: user.authentication.idToken, errorCallback: viewModel!.renderBasicErrorMessage(on: view), completion: sessionCallback)
+            sessionLogicController.googleSignIn(
+                email: user.profile.email,
+                tokenId: user.authentication.idToken,
+                errorCallback: { () in self.viewModel!.renderBasicErrorMessage() },
+                completion: sessionCallback)
         }
     }
     
