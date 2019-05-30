@@ -25,6 +25,10 @@ class SessionLogicController: SessionLogicControllerProtocol {
             errorCallback?()
             return
         }
+        guard !username.isEmpty, !password.isEmpty else {
+            errorCallback?()
+            return
+        }
         
         guard let url = URL(string: "\(baseUrl)api/sessions") else { return }
         let json = SignInNetworking.buildSignInPayload(username: username, password: password)

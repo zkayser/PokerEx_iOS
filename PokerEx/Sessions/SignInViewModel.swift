@@ -17,7 +17,7 @@ fileprivate let verticalSpacing: CGFloat = 25
 fileprivate let buttonHeight: CGFloat = 50
 fileprivate let borderWidth: CGFloat = 2
 fileprivate let padding: CGFloat = 10
-fileprivate let LOGIN_ERROR_MSG = "We're sorry. Something went wrong with your login. Please try again shortly."
+fileprivate let LOGIN_ERROR_MSG = "Login failed"
 
 class SignInViewModel {
     
@@ -25,6 +25,7 @@ class SignInViewModel {
     let containerView: UIView
     let signInButton: UIButton
     let textFields: [String: UITextField]
+    private var isErrorMessageVisible: Bool = false
     
     init(parent view: UIView, containerView: UIView, signInButton: UIButton, textFields: [String: UITextField]) {
         self.parentView = view
@@ -114,42 +115,40 @@ class SignInViewModel {
     }
     
     func renderBasicErrorMessage(message: String = LOGIN_ERROR_MSG) {
-            DispatchQueue.main.sync {
-                guard let topMostTextField = self.textFields["username"] else { return }
-                let label = UIButton()
-                label.isUserInteractionEnabled = false
-                label.contentEdgeInsets = UIEdgeInsetsMake(padding, padding, padding, padding)
-                label.layer.backgroundColor = UIColor.red.cgColor
-                label.layer.cornerRadius = 10.0
-                label.setTitle(message, for: .normal)
-                label.tintColor = .white
-                label.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
-                label.frame = CGRect(x: topMostTextField.frame.minX,
-                                     y: topMostTextField.frame.minY - (verticalSpacing * 2.5),
-                                     width: topMostTextField.frame.maxX - topMostTextField.frame.minX,
-                                     height: verticalSpacing * 2.5)
-                label.titleLabel?.lineBreakMode = .byWordWrapping
-                label.titleLabel?.numberOfLines = 0
-                label.titleLabel?.textAlignment = .center
-                label.transform = CGAffineTransform(translationX: UIScreen.main.bounds.maxX, y: 0)
-                topMostTextField.superview?.addSubview(label)
-                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
-                    label.transform = CGAffineTransform(translationX: 0, y: 0)
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            guard let topMostTextField = strongSelf.textFields["username"] else { return }
+            if strongSelf.isErrorMessageVisible { return }
+            let label = UIButton()
+            label.isUserInteractionEnabled = false
+            label.contentEdgeInsets = UIEdgeInsetsMake(padding, padding, padding, padding)
+            label.layer.backgroundColor = UIColor.red.cgColor
+            label.layer.cornerRadius = 10.0
+            label.setTitle(message, for: .normal)
+            label.tintColor = .white
+            label.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+            label.frame = CGRect(x: topMostTextField.frame.minX,
+                                 y: topMostTextField.frame.minY - (verticalSpacing * 3),
+                                 width: topMostTextField.frame.maxX - topMostTextField.frame.minX,
+                                 height: verticalSpacing * 2.5)
+            label.titleLabel?.lineBreakMode = .byWordWrapping
+            label.titleLabel?.numberOfLines = 0
+            label.titleLabel?.textAlignment = .center
+            label.transform = CGAffineTransform(translationX: UIScreen.main.bounds.maxX, y: 0)
+            topMostTextField.superview?.addSubview(label)
+            strongSelf.isErrorMessageVisible = true
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
+                label.transform = CGAffineTransform(translationX: 0, y: 0)
+            })
+            
+            Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { (timer) in
+                UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+                    label.transform = CGAffineTransform(translationX: -(UIScreen.main.bounds.maxX), y: 0)
+                }, completion: { (_) in
+                    label.removeFromSuperview()
+                    strongSelf.isErrorMessageVisible = false
                 })
-                
-                Timer.scheduledTimer(withTimeInterval: 2.5, repeats: false, block: { (timer) in
-                    UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
-                        label.transform = CGAffineTransform(translationX: -(UIScreen.main.bounds.maxX), y: 0)
-                    }, completion: { (_) in
-                        label.removeFromSuperview()
-                    })
-                })
-            }
-    }
-}
-
-extension UIColor {
-    public static func darkTeal() -> UIColor {
-      return UIColor(displayP3Red: 0, green: 155, blue: 2, alpha: 1)
+            })
+        }
     }
 }

@@ -32,7 +32,7 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
         
         if let response = response as? HTTPURLResponse {
             let statusCode = response.statusCode
-            if (statusCode != 200) {
+            if (statusCode == 401) {
                 strongSelf.viewModel!.renderUnauthenticatedError()
                 return
             }
@@ -104,7 +104,6 @@ class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignIn
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        print("You hit the signin button....")
         sessionLogicController.signIn(username: usernameField.text,
                                       password: passwordField.text,
                                       errorCallback: viewModel!.renderErrorMessage,

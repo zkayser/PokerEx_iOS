@@ -11,7 +11,11 @@ class FakeSessionLogicController: SessionLogicControllerProtocol {
     var error: Error?
     
     func signIn(username: String?, password: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
-        guard let _ = username, let _ = password else {
+        guard let username = username, let password = password else {
+            wasErrorCallbackInvoked = true
+            return
+        }
+        guard !username.isEmpty && !password.isEmpty else {
             wasErrorCallbackInvoked = true
             return
         }

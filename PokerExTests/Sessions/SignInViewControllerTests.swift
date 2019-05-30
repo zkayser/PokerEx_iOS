@@ -32,6 +32,7 @@ class SignInViewControllerTests: XCTestCase {
     
     var signInFailed: Bool = false
     var assignedDataToUserDefaults: Bool = false
+    var renderedUnauthenticatedMessage: Bool = false
     var dataAssignedToUserDefaults: Data?
     lazy var mockSessionCallback: DataTaskCallback = { data, response, error in
         guard let data = data, let response = response, error == nil else {
@@ -39,12 +40,30 @@ class SignInViewControllerTests: XCTestCase {
             return
         }
         
+        if let response = response as? HTTPURLResponse {
+            
+            if (response.statusCode == 401) {
+                self.renderedUnauthenticatedMessage = true
+                return
+            }
+        }
+        
         self.assignedDataToUserDefaults = true
         self.dataAssignedToUserDefaults = data
     }
     
     override func setUp() {
+        let containerView = UIView()
+        let parentView = UIView()
+        let signInButton = UIButton()
+        let passwordField = UITextField()
+        let usernameField = UITextField()
+        containerView.addSubview(signInButton)
+        parentView.addSubview(containerView)
         signInViewController.authentication = auth
+        signInViewController.usernameField = usernameField
+        signInViewController.passwordField = passwordField
+        signInViewController.viewModel = SignInViewModel(parent: parentView, containerView: containerView, signInButton: signInButton, textFields: ["username": usernameField, "password": passwordField])
         signInViewController.sessionLogicController = fakeSessionLogicController
         signInViewController.sessionCallback = mockSessionCallback
     }
@@ -55,6 +74,7 @@ class SignInViewControllerTests: XCTestCase {
         fakeSessionLogicController.resetMocks()
         auth.credentials = .none
         signInFailed = false
+        renderedUnauthenticatedMessage = false
         assignedDataToUserDefaults = false
         dataAssignedToUserDefaults = nil
     }
@@ -89,8 +109,8 @@ class SignInViewControllerTests: XCTestCase {
     }
     
     func test_givenUsernameAndPasswordWithSuccessfulAPIResponse_signInInvokesCallbackWithSuccess() {
-        signInViewController.username = "someUser"
-        signInViewController.password = "password"
+        signInViewController.usernameField!.text = "someUser"
+        signInViewController.passwordField!.text = "password"
         // Mock successful network response
         fakeSessionLogicController.mockNetworkResponse(data: sessionData, response: urlResponse, error: nil)
         signInViewController.signIn(UIButton())
@@ -105,12 +125,26 @@ class SignInViewControllerTests: XCTestCase {
     }
     
     func test_givenErrorOnAPISignin_signInInvokesCallbackWithError() {
-        signInViewController.username = "someUser"
-        signInViewController.password = "password"
+        signInViewController.usernameField!.text = "someUser"
+        signInViewController.passwordField!.text = "password"
         // Mock unsuccessful network response
         fakeSessionLogicController.mockNetworkResponse(data: nil, response: nil, error: error)
         signInViewController.signIn(UIButton())
         XCTAssert(fakeSessionLogicController.wasCompletionInvoked)
         XCTAssert(signInFailed)
+    }
+    
+    func test_givenAnUnauthenticatedResponseFromTheServer_shouldRenderUnauthenticatedMessage() {
+        let response: HTTPURLResponse = HTTPURLResponse(url: URL(string: "www.mock.com")!,
+                                                        statusCode: 401,
+                                                        httpVersion: "2",
+                                                        headerFields: [:])!
+        fakeSessionLogicController.mockNetworkResponse(data: sessionData, response: response, error: nil)
+        signInViewController.usernameField!.text = "someUser"
+        signInViewController.passwordField!.text = "password"
+        signInViewController.signIn(UIButton())
+        XCTAssert(fakeSessionLogicController.wasCompletionInvoked)
+        XCTAssert(renderedUnauthenticatedMessage)
+        XCTAssertFalse(assignedDataToUserDefaults)
     }
 }
