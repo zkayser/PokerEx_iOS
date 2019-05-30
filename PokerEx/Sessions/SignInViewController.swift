@@ -1,6 +1,7 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
+import GoogleSignIn
 
 // Constants
 fileprivate let leftMargin: CGFloat = 16
@@ -10,15 +11,14 @@ fileprivate let verticalSpacing: CGFloat = 25
 fileprivate let buttonHeight: CGFloat = 50
 fileprivate let borderWidth: CGFloat = 2
 
-class SignInViewController: UIViewController, SessionDelegateProtocol {
+class SignInViewController: UIViewController, SessionDelegateProtocol, GIDSignInUIDelegate {
 
-    private let loginButton = LoginButton(readPermissions: [.publicProfile, .email])
     var username: String?
     var password: String?
     var sessionLogicController: SessionLogicControllerProtocol!
     var authentication: AuthenticationProtocol!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var socialLoginContainer: UIView!
+    var viewModel: SignInViewModel?
+    @IBOutlet weak var containerView: UIStackView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
@@ -26,8 +26,16 @@ class SignInViewController: UIViewController, SessionDelegateProtocol {
     lazy var sessionCallback: DataTaskCallback = { [weak self] data, response, error in
         guard let strongSelf = self else { return }
         guard let data = data, let response = response, error == nil else {
-            strongSelf.renderBasicErrorMessage()
+            strongSelf.viewModel!.renderBasicErrorMessage()
             return
+        }
+        
+        if let response = response as? HTTPURLResponse {
+            let statusCode = response.statusCode
+            if (statusCode == 401) {
+                strongSelf.viewModel!.renderUnauthenticatedError()
+                return
+            }
         }
 
         UserDefaults.standard.set(data, forKey: kSession)
@@ -39,8 +47,18 @@ class SignInViewController: UIViewController, SessionDelegateProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        socialLoginContainer.addSubview(loginButton)
-        loginButton.frame = CGRect(x: leftMargin / 2, y: 0, width: UIScreen.main.bounds.width - (3 * leftMargin), height: buttonHeight)
+        // Instantiate view model
+        viewModel = SignInViewModel(parent: view,
+                                    containerView: containerView,
+                                    signInButton: signInButton,
+                                    textFields: ["username": usernameField, "password": passwordField])
+        
+        // set self as the delegate for Google Sign In UI and GoogleSignIn
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        // Add google sign in button
+        viewModel?.renderGoogleSignIn(with: self)
         
         // add tap gesture recognizer to dismiss keyboard when tap anywhere on screen
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -53,8 +71,10 @@ class SignInViewController: UIViewController, SessionDelegateProtocol {
         authentication = Authentication.shared
         
         // add a bottom border to text fields
-        usernameField.layer.addSublayer(buildBottomBorderLayer())
-        passwordField.layer.addSublayer(buildBottomBorderLayer())
+        if let viewModel = viewModel {
+            usernameField.layer.addSublayer(viewModel.buildBottomBorderLayer())
+            passwordField.layer.addSublayer(viewModel.buildBottomBorderLayer())
+        }
         
         // set self as the delegate for text fields
         usernameField.delegate = self
@@ -67,7 +87,9 @@ class SignInViewController: UIViewController, SessionDelegateProtocol {
         
         switch (authentication.getCredentials()) {
             case .session: performSegue(withIdentifier: HOME_VIEW_SEGUE, sender: nil)
-            case .facebook: sessionLogicController.facebookSignIn(errorCallback: renderBasicErrorMessage, completion: sessionCallback)
+        case .facebook: sessionLogicController.facebookSignIn(
+            errorCallback: { () in self.viewModel!.renderBasicErrorMessage() },
+            completion: sessionCallback)
             case .none: return
         }
     }
@@ -82,49 +104,14 @@ class SignInViewController: UIViewController, SessionDelegateProtocol {
     
     // Actions
     @IBAction func signIn(_ sender: Any) {
-        sessionLogicController.signIn(username: username, password: password, errorCallback: renderErrorMessage, completion: sessionCallback)
+        sessionLogicController.signIn(username: usernameField.text,
+                                      password: passwordField.text,
+                                      errorCallback: viewModel!.renderErrorMessage,
+                                      completion: sessionCallback)
     }
     
-    private func animate() {
-        print("wire up animations here")
-    }
-    
-    // UI Helpers
-    func renderErrorMessage() {
-        if (username == nil) {
-            errorLabel(for: "username", on: usernameField)
-        }
-        
-        if (password == nil) {
-            errorLabel(for: "password", on: passwordField)
-        }
-    }
-    
-    func renderBasicErrorMessage() {
-        let label = UILabel()
-        label.text = "We're sorry. Something went wrong with your login. Please try again shortly."
-        label.textColor = .red
-        label.font.withSize(14)
-        label.frame = CGRect(x: leftMargin, y: topMargin, width: view.frame.width, height: verticalSpacing)
-        view.addSubview(label)
-    }
-    
-    private func errorLabel(for property: String, on textField: UITextField) {
-        let label = UILabel()
-        label.text = "\(property.capitalized) must not be blank"
-        label.textColor = .red
-        label.textAlignment = .center
-        label.font.withSize(14)
-        label.frame = CGRect(x: textField.frame.minX, y: textField.frame.minY - errorLabelMargin, width: containerView.frame.width, height: verticalSpacing)
-        containerView.addSubview(label)
-    }
-    
-    private func buildBottomBorderLayer() -> CALayer {
-        let borderLayer = CALayer()
-        borderLayer.borderColor = UIColor.lightGray.cgColor
-        borderLayer.frame = CGRect(x: leftMargin, y: usernameField.frame.size.height + 5, width: UIScreen.main.bounds.width - (4 * leftMargin), height: borderWidth)
-        borderLayer.borderWidth = borderWidth
-        return borderLayer
+    @objc func signInWithGoogle() {
+        GIDSignIn.sharedInstance().signIn()
     }
     
     @objc private func dismissKeyboard() {
@@ -145,6 +132,44 @@ extension SignInViewController: UITextFieldDelegate {
         } else {
             password = textField.text
         }
+    }
+}
+
+extension SignInViewController: GIDSignInDelegate {
+    // GOOGLE SIGN IN DELEGATE FUNCTIONS
+    private func application(application: UIApplication,
+                             openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        var _: [String: AnyObject] = [UIApplicationOpenURLOptionsKey.sourceApplication.rawValue: sourceApplication as AnyObject,
+                                      UIApplicationOpenURLOptionsKey.annotation.rawValue: annotation!]
+        return GIDSignIn.sharedInstance().handle(url as URL?,
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url as URL?,
+                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+        if let _ = error {
+            viewModel!.renderBasicErrorMessage()
+        } else {
+            sessionLogicController.googleSignIn(
+                email: user.profile.email,
+                tokenId: user.authentication.idToken,
+                errorCallback: { () in self.viewModel!.renderBasicErrorMessage() },
+                completion: sessionCallback)
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
+              withError error: Error!) {
+        print("User disconnected: \(user)")
     }
 }
 

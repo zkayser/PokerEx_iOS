@@ -19,32 +19,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="gpY-LZ-J7M">
-                                <rect key="frame" x="157" y="303" width="60" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="TGe-5R-SCa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUv-aA-FW8">
-                                <rect key="frame" x="16" y="250" width="343" height="37"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="PokerEx">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="32" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" name="Teal"/>
                         <constraints>
-                            <constraint firstItem="gpY-LZ-J7M" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="283" id="V5H-Gv-yF0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gpY-LZ-J7M" secondAttribute="trailing" constant="158" id="Z4G-rz-7S0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eUv-aA-FW8" secondAttribute="trailing" constant="16" id="bVa-rb-ewU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gpY-LZ-J7M" secondAttribute="bottom" constant="304" id="dQ5-sh-RW1"/>
-                            <constraint firstItem="eUv-aA-FW8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hpt-DW-5bI"/>
-                            <constraint firstItem="gpY-LZ-J7M" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="157" id="kc8-LL-nVz"/>
-                            <constraint firstItem="gpY-LZ-J7M" firstAttribute="top" secondItem="eUv-aA-FW8" secondAttribute="bottom" constant="16" id="vU0-et-olO"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1Gq-Ta-HOx"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N9X-nx-9CO"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="NFd-Kl-D4S"/>
+                            <constraint firstItem="TGe-5R-SCa" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="zyf-PW-SUp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -55,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="50" height="50"/>
+        <image name="SplashScreen" width="300" height="300"/>
         <namedColor name="Teal">
             <color red="0.0" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

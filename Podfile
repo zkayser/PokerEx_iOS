@@ -8,6 +8,8 @@ target 'PokerEx' do
   # Pods for PokerEx
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  pod 'GoogleSignIn'
+  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '3.x'
 
   target 'PokerExTests' do
     inherit! :search_paths

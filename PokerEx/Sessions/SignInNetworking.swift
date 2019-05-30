@@ -5,6 +5,8 @@ fileprivate let USERNAME = "username"
 fileprivate let PASSWORD = "password"
 fileprivate let NAME = "name"
 fileprivate let FACEBOOK_ID = "facebook_id"
+fileprivate let EMAIL = "email"
+fileprivate let TOKEN_ID = "google_token_id"
 
 class SignInNetworking {
     
@@ -22,6 +24,13 @@ class SignInNetworking {
         var json = [String: Any]()
         json[NAME] = username
         json[FACEBOOK_ID] = facebookId
+        return json
+    }
+    
+    static func buildGoogleSignInPayload(email: String, tokenId: String) -> [String: Any] {
+        var json = [String: Any]()
+        json[EMAIL] = email
+        json[TOKEN_ID] = tokenId
         return json
     }
     

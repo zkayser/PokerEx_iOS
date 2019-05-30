@@ -11,7 +11,11 @@ class FakeSessionLogicController: SessionLogicControllerProtocol {
     var error: Error?
     
     func signIn(username: String?, password: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
-        guard let _ = username, let _ = password else {
+        guard let username = username, let password = password else {
+            wasErrorCallbackInvoked = true
+            return
+        }
+        guard !username.isEmpty && !password.isEmpty else {
             wasErrorCallbackInvoked = true
             return
         }
@@ -27,6 +31,16 @@ class FakeSessionLogicController: SessionLogicControllerProtocol {
         } else {
             wasErrorCallbackInvoked = true
         }
+    }
+    
+    func googleSignIn(email: String?, tokenId: String?, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
+        guard let _ = email, let _ = tokenId else {
+            wasErrorCallbackInvoked = true
+            return
+        }
+        
+        wasCompletionInvoked = true
+        completion(sessionData, response, error)
     }
     
     func signUp(registration: Registration, errorCallback: (() -> Void)?, completion: @escaping DataTaskCallback) {
